@@ -12,9 +12,12 @@
 
 
 ## Team 3: Modulo Profesores
+
+
+
 1. Ariel Rodriguez Monroy
 2. Danna Paola Cervantes Ramirez
- 
+3. Dulce Maria Trinidad Garcia
 
 
 ## Team 4: Modulo Asignaturas/Materias
