@@ -4,6 +4,7 @@
 1. Eric Uriel Rojas Torres
 2. Job Natanael Flores Flores
 
+4. Alfonso Cid Angeles
 
 
 ## Team 2: Modulo Inscripciones
