@@ -32,7 +32,7 @@
 ## Team 5: Calendario de exámenes
 1. Melany Joana Toledo Escamilla
 2. Jorge Uriel Vidal Morales
-
+3. Alan Daniel Salas Gutiérrez
 4. Samuel Riveroll Vargas
 
 
