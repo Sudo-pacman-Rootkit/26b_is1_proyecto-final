@@ -5,9 +5,11 @@
 2. Job Natanael Flores Flores
 
 
+
 ## Team 2: Modulo Inscripciones
 1. Pamela Concepcion Abasolo Diaz
 2. Hector Jesus Garcia Monroy
+3. Santiago Cuevas Sanchez
 
 
 
@@ -35,8 +37,10 @@
 
 
 ## Modulo 6: Modulo Registro de calificaciones
+
 1. Luis Fernando Guerrero Pedroza
 2. Tendzin Angello Diaz Estrada
 3. Erick Daniel Rosales González
 4. Gabriell Quetzalli Santana Reyes
+
 
