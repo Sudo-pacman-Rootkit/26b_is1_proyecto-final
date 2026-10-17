@@ -1,4 +1,9 @@
 # Modulo {nombre de tu modulo}
+
+>
+> Equipo {numero del equipo autor}
+>
+
 ## Resumen
 ## Objetivo y Alcance
 ## Requerimientos funcionales 
