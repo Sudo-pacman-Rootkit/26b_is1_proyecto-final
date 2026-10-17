@@ -11,7 +11,7 @@
 1. Pamela Concepcion Abasolo Diaz
 2. Hector Jesus Garcia Monroy
 3. Santiago Cuevas Sanchez
-
+4. Kevin Alejandro Nabor Matias
 
 
 ## Team 3: Modulo Profesores
