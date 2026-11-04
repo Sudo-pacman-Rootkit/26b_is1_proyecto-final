@@ -1,6 +1,6 @@
 # Teams
 
-## Team 1: Modulo Alumnos
+## Team 1: Modulo Alumnos + Modulo de Inicio de sesión
 1. Eric Uriel Rojas Torres
 2. Job Natanael Flores Flores
 3. Alejandro Corral Zarza
