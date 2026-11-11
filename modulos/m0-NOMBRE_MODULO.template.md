@@ -14,7 +14,7 @@
 
 ## Diagrama de casos de uso
 
-{codigo fuente uml}
+{codigo fuente uml, coloca un link que haga referencia al archvio que contiene el codigo fuente}
 
 {imagen visible}
 
@@ -22,25 +22,29 @@
 
 Nota: Generar 1 diagrama de componentes por cada caso de uso.
 
-{codigo fuente uml}
-
+{codigo fuente uml, coloca un link que haga referencia al archvio que contiene el codigo fuente}
 {imagen visible}
 
 ## Diagrama de secuencia
 
 Nota: Generar 1 diagrama de secuencia por cada caso de uso.
 
-{codigo fuente uml}
-
+{codigo fuente uml, coloca un link que haga referencia al archvio que contiene el codigo fuente}
 {imagen visible}
 
 ## Diagrama de estados
 
 Nota: Generar 1 diagrama de estados para objetos o clases involucradas.
 
-{codigo fuente uml}
+{codigo fuente uml, coloca un link que haga referencia al archvio que contiene el codigo fuente}
+{imagen visible}
+
+## Diagrama de clases
+
+{codigo fuente uml, coloca un link que haga referencia al archvio que contiene el codigo fuente}
 
 {imagen visible}
+
 
 
 
