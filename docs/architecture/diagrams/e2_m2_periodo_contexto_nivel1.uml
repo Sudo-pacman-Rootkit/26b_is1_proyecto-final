@@ -1,0 +1,79 @@
+@startuml
+
+title Nivel 1 - Módulo Periodo
+
+left to right direction
+skinparam shadowing false
+skinparam roundcorner 15
+skinparam defaultTextAlignment center
+skinparam componentStyle rectangle
+
+actor "Administrador de\nControl Escolar" as ControlEscolar
+actor "Docente" as Docente
+actor "Alumno" as Alumno
+
+component "Módulo\nAlumnos" as MAlumnos #F2F4F4
+component "Módulo\nInscripciones" as MInscripciones #F2F4F4
+component "Módulo Calendario\nde Exámenes" as MExamenes #F2F4F4
+component "Módulo Registro\nde Calificaciones" as MCalificaciones #F2F4F4
+
+frame "Sistema de Gestión Académica\nMódulo Periodo" {
+
+    rectangle "Interfaz Web\n(Front-end)" as Frontend #D6EAF8
+    rectangle "API REST\n(Back-end)" as API #D6EAF8
+
+    frame "Subsistemas funcionales" {
+        rectangle "Gestión y apertura\nde periodos" as GestionPeriodo #EBF5FB
+        rectangle "Configuración de\ncalendario escolar" as CalendarioEscolar #EBF5FB
+        rectangle "Control de estatus\n(Activo / Histórico)" as EstatusPeriodo #EBF5FB
+        rectangle "Definición de ventanas\nde captura" as VentanasCaptura #EBF5FB
+    }
+
+    database "Base de Datos" as DB #F9E79F
+}
+
+' Interacciones de los Actores
+ControlEscolar --> Frontend : registrar, configurar, activar\ny cerrar periodos escolares
+Docente --> Frontend : consultar periodo activo\ny fechas de captura
+Alumno --> Frontend : consultar periodo escolar vigente
+
+' Conexión Frontend y Backend
+Frontend --> API : HTTPS / REST / JSON
+
+' Roteo interno
+API --> GestionPeriodo : dar de alta y modificar\ndatos del periodo
+API --> CalendarioEscolar : programar fechas clave\ndel ciclo escolar
+API --> EstatusPeriodo : cambiar estado del ciclo\n(activo, cerrado)
+API --> VentanasCaptura : administrar plazos para\nsubida de notas
+
+' Base de datos propia
+GestionPeriodo --> DB : SQL
+CalendarioEscolar --> DB : SQL
+EstatusPeriodo --> DB : SQL
+VentanasCaptura --> DB : SQL
+
+' Información que Periodo provee a otros módulos (Dependencias externas)
+CalendarioEscolar --> MInscripciones : fechas de inicio y fin del periodo
+CalendarioEscolar --> MExamenes : periodos hábiles para evaluaciones
+VentanasCaptura --> MCalificaciones : plazos permitidos de captura de notas
+EstatusPeriodo --> MAlumnos : validación de vigencia escolar
+
+' Notas de apoyo
+note top of Frontend
+  Permite al administrador gestionar
+  los ciclos lectivos y consultar
+  la vigencia para el resto del sistema.
+end note
+
+note top of API
+  Centraliza la lógica de negocio
+  para la sincronización de fechas
+  con el resto de los módulos.
+end note
+
+note top of DB
+  Almacena catálogos de periodos,
+  fechas clave y estados operativos.
+end note
+
+@enduml
