@@ -1,0 +1,89 @@
+@startuml
+
+title Nivel 1 - Módulo Inscripciones
+
+left to right direction
+skinparam shadowing false
+skinparam roundcorner 15
+skinparam defaultTextAlignment center
+skinparam componentStyle rectangle
+
+actor "Alumno" as Alumno
+actor "Personal de\nControl Escolar" as ControlEscolar
+
+component "Módulo\nAlumnos" as MAlumnos #F2F4F4
+component "Módulo Asignaturas\ny Materias" as MMaterias #F2F4F4
+component "Módulo Aulas\ny Grupos" as MGrupos #F2F4F4
+component "Módulo Periodos\nEscolares" as MPeriodos #F2F4F4
+
+rectangle "Servicio institucional\nde notificaciones / correo\n(Propuesta)" as Notificaciones #FCF3CF
+
+frame "Sistema de Gestión Académica\nMódulo Inscripciones" {
+
+    rectangle "Interfaz Web\n(Front-end)" as Frontend #D6EAF8
+    rectangle "API REST\n(Back-end)" as API #D6EAF8
+
+    frame "Subsistemas funcionales" {
+        rectangle "Verificación de ventana\ny turno de inscripción" as VentanaInscripcion #EBF5FB
+        rectangle "Validación de\nrequisitos y cupos" as Validacion #EBF5FB
+        rectangle "Registro de\ninscripción" as Registro #EBF5FB
+        rectangle "Generación de\ncomprobantes" as Comprobantes #EBF5FB
+    }
+
+    database "Base de Datos" as DB #F9E79F
+}
+
+' Interacciones de los Actores
+Alumno --> Frontend : consultar oferta académica,\narmar horario y solicitar inscripción
+Alumno --> Frontend : descargar comprobante\nde inscripción
+
+ControlEscolar --> Frontend : consultar reportes de inscritos,\nestadísticas y ajustes de matrícula
+
+' Conexión Frontend y Backend
+Frontend --> API : HTTPS / REST / JSON
+
+' Roteo interno
+API --> VentanaInscripcion : verificar si el alumno\npuede inscribirse hoy
+API --> Validacion : validar cruces de horario\ny disponibilidad de cupo
+API --> Registro : procesar y confirmar\ncarga académica
+API --> Comprobantes : generar resumen\ny folio de inscripción
+
+' Base de datos propia
+VentanaInscripcion --> DB : SQL
+Validacion --> DB : SQL
+Registro --> DB : SQL
+Comprobantes --> DB : SQL
+
+' Integraciones con módulos externos (Consumo de datos)
+MPeriodos --> VentanaInscripcion : periodo vigente y\ncalendario de fechas
+MAlumnos --> Validacion : estatus académico,\nmatrícula y regularidad
+MMaterias --> Validacion : oferta de materias,\nseriación y créditos
+MGrupos --> Validacion : horarios y cupos disponibles
+
+' Información que Inscripciones provee a otros módulos
+Registro --> MMaterias : confirmación de carga\ny asignaturas inscritas
+
+' Servicio externo
+Comprobantes ..> Notificaciones : envío de comprobante\npor correo
+Notificaciones ..> Comprobantes : acuse de envío
+
+' Notas de apoyo
+note top of Frontend
+  Presenta la selección de materias,
+  horario preliminar y descarga
+  de comprobantes.
+end note
+
+note top of API
+  Coordina las validaciones
+  con los módulos externos antes
+  de efectuar el registro final.
+end note
+
+note top of DB
+  Almacena folios de inscripción,
+  materias registradas por alumno
+  y estados de confirmación.
+end note
+
+@enduml
