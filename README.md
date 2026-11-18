@@ -39,7 +39,9 @@
 ## 5.2 Interfaz de usuario (mockups, wireframes)
 
 # Índice de Módulos
--
+
+- [Módulo 1: Alumnos](./modulos/m1_alumnos.md)
+- 
 - [Módulo 2: Inscripciones](./modulos/modulo-inscripciones.md)
 - 
 - [Módulo 4: Asignaturas/Materias](./modulos/m4_asignaturas.md)
