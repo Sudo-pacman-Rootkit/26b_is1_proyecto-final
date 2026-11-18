@@ -1,0 +1,87 @@
+@startuml
+title Sistema de Control Escolar — Nivel 1: Contenedores y módulos
+top to bottom direction
+skinparam nodesep 22
+skinparam ranksep 26
+skinparam shadowing false
+skinparam defaultFontName Segoe UI
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam rectangle {
+  BackgroundColor #F7FAFC
+  BorderColor #245A7A
+  FontColor #173042
+}
+skinparam component {
+  BackgroundColor #EAF3F8
+  BorderColor #3B718C
+  FontColor #173042
+}
+skinparam database {
+  BackgroundColor #EEF4E8
+  BorderColor #5B7C45
+  FontColor #173042
+}
+skinparam arrow {
+  Color #315D73
+  FontColor #173042
+  Thickness 2
+}
+skinparam note {
+  BackgroundColor #FFF7E6
+  BorderColor #B7791F
+}
+
+actor "Estudiante, docente,\nControl Escolar" as usuarios
+actor "Dirección / usuario público\n(candidato; validar)" as roles_candidatos
+cloud "Proveedor institucional\nde identidad\n(candidato)" as identidad
+cloud "Servicio de avisos\n(candidato)" as avisos
+
+rectangle "Sistema de Control Escolar (SCE)" as sce {
+  component "Aplicación web responsiva" as web
+  component "API / back-end modular" as api
+
+  package "Servicios de dominio / módulos lógicos" as servicios {
+    package "Módulos base asignados en clase 13" as base {
+      component "Alumnos" as alumnos
+      component "Inscripciones" as inscripciones
+      component "Profesores" as profesores
+      component "Asignaturas y materias" as materias
+      component "Calendario de exámenes" as calendario
+      component "Registro de calificaciones" as calificaciones
+    }
+
+    package "Módulos añadidos en clase 17" as modulos17 #EAF3F8 {
+      component "Periodos escolares\n(agregado a Inscripciones; equipo 2)" as periodos
+      component "Aulas / grupos\n(agregado al equipo 5; nombre por definir)" as aulas_grupos
+      component "Catálogo de exámenes\n(asociado a calificaciones; equipo por confirmar)" as catalogo_examenes
+    }
+
+    package "Otras áreas, módulos o funciones citados\n(clases 4–12; validar con el equipo)" as candidatos #FFF7E6 {
+      component "Datos personales compartidos" as datos_personales
+      component "Bajas" as bajas
+      component "Trayectoria académica" as trayectoria
+      component "Análisis por ciclo" as analisis_ciclo
+      component "Reportes / boletas\n(módulo o salida)" as reportes
+      component "Registro de extraordinarios /\ntítulo de suficiencia" as extraordinarios
+      component "Generación de vouchers\n(función citada)" as vouchers
+      component "Consulta / búsqueda\n(¿módulo independiente?)" as consulta
+    }
+  }
+
+  database "Base de datos relacional\n(motor por definir)" as bd
+}
+
+usuarios --> web : HTTPS
+roles_candidatos ..> web : HTTPS\n(interacción por validar)
+web <--> api : HTTPS / REST
+api --> servicios : Llamadas internas
+servicios <--> bd : SQL/TCP vía driver\n(motor por definir)
+
+api <--> identidad : OIDC/OAuth2 sobre HTTPS\n(propuesta por validar)
+api ..> avisos : REST sobre HTTPS o SMTP\n(propuesta por validar)
+
+@enduml
+
+
+

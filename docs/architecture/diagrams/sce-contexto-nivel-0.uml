@@ -1,0 +1,48 @@
+@startuml
+title Sistema de Control Escolar — Nivel 0: Contexto
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName Segoe UI
+skinparam actorStyle awesome
+skinparam rectangle {
+  BackgroundColor #F7FAFC
+  BorderColor #245A7A
+  FontColor #173042
+}
+skinparam arrow {
+  Color #315D73
+  FontColor #173042
+  Thickness 2
+}
+skinparam note {
+  BackgroundColor #FFF7E6
+  BorderColor #B7791F
+}
+
+actor "Estudiante" as estudiante
+actor "Docente" as docente
+actor "Personal de Control Escolar" as control
+actor "Dirección / usuario público\n(posibles roles; por validar)" as roles_candidatos
+
+rectangle "Sistema de Control Escolar (SCE)\n\nCaja negra: integra módulos académicos,\nadministrativos y de consulta." as sce #EAF3F8
+
+cloud "Proveedor institucional de identidad\n(candidato; por confirmar)" as identidad
+cloud "Servicio institucional de notificaciones\n(candidato; por confirmar)" as avisos
+
+estudiante <--> sce : Acceso, consulta de información,\ninscripciones y trámites\n\nHorarios, historial,\nconfirmaciones y calificaciones
+docente <--> sce : Consulta de grupos y captura\nde evaluaciones\n\nListas, promedios,\nsituación académica
+control <--> sce : Administración de alumnos,\ndocentes, materias y calendario\n\nReportes y estados de procesos
+roles_candidatos ..> sce : Interacción por definir\n(clase 16; acceso público limitado)
+
+sce ..> identidad : Validación de identidad\n(integración por confirmar)
+identidad ..> sce : Resultado de autenticación
+sce ..> avisos : Solicitud de envío de aviso\n(integración por confirmar)
+avisos ..> sce : Estado de entrega
+
+note bottom
+  Dirección y usuario público aparecen en clase 16 como roles posibles para
+  Control Escolar; hay que validar si forman parte del alcance real.
+  Identidad y notificaciones no se identifican como integraciones reales en
+  las transcripciones; se muestran solo como opciones por confirmar.
+end note
+@enduml
