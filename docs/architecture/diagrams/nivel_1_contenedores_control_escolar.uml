@@ -1,0 +1,48 @@
+@startuml nivel_1_contenedores_control_escolar
+left to right direction
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam ArrowColor #36536B
+skinparam defaultTextAlignment center
+title Nivel 1 - Contenedores y subsistemas del Control Escolar
+actor "Alumno / Profesor /\nControl Escolar / Coordinación" as Usuarios
+rectangle "Sistema de Control Escolar" {
+  rectangle "Aplicación web\n[Interfaz de usuario]" as Web #DCEEFF
+  rectangle "Servidor de aplicaciones / API\n[Lógica de negocio]" as API #DCEEFF
+  package "Subsistemas del servidor" {
+    rectangle "Alumnos e inscripciones" as A #E6F5E8
+    rectangle "Profesores, asignaturas,\nperiodos, aulas y grupos" as B #E6F5E8
+    rectangle "Calendario de exámenes" as C #E6F5E8
+    rectangle "Catálogo de exámenes\n[Equipo 6]" as D #FFF0CC
+    rectangle "Registro de calificaciones\n[Equipo 6]" as E #FFF0CC
+  }
+  database "Base de datos del\nControl Escolar\n[Motor por confirmar]" as BD #F1E6FA
+}
+rectangle "Autenticación externa\n[Opcional]" as Auth #F7F7F7
+rectangle "Notificaciones externas\n[Opcional]" as Notif #F7F7F7
+Usuarios --> Web : HTTPS
+Web --> API : HTTPS / REST (propuesto)
+API --> A : Llamadas internas
+API --> B : Llamadas internas
+API --> C : Llamadas internas
+API --> D : Llamadas internas
+API --> E : Llamadas internas
+C --> D : Consultar tipos y requisitos
+E --> D : Consultar reglas de evaluación
+E --> A : Validar inscripción
+E --> B : Consultar profesor y asignatura
+A --> BD : SQL / acceso a datos
+B --> BD : SQL / acceso a datos
+C --> BD : SQL / acceso a datos
+D --> BD : SQL / acceso a datos
+E --> BD : SQL / acceso a datos
+API --> Auth : HTTPS [si se integra]
+API --> Notif : HTTPS/SMTP [si se integra]
+note bottom of BD
+  Se propone una base de datos compartida con permisos por módulo.
+  No se asumen cachés, colas ni servicios separados sin requisitos que los justifiquen.
+end note
+@enduml

@@ -1,0 +1,35 @@
+@startuml nivel_0_contexto_control_escolar
+!pragma layout smetana
+left to right direction
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam roundCorner 12
+skinparam ArrowColor #36536B
+skinparam ArrowFontColor #273746
+skinparam defaultTextAlignment center
+title Nivel 0 - Contexto del Sistema de Control Escolar
+actor "Alumno" as Alumno
+actor "Profesor" as Profesor
+actor "Control Escolar" as Control
+actor "Coordinación Académica" as Coord
+rectangle "Sistema de Control Escolar\n[Alumnos, inscripciones, profesores,\nasignaturas, periodos, grupos y aulas,\ncalendario de exámenes,\ncalificaciones y catálogo de exámenes]" as Sistema #E6F2FA
+rectangle "Servicio institucional de\nautenticación (si existe)" as Identidad #FFF2D9
+rectangle "Servicio de correo /\nnotificaciones (si existe)" as Correo #FFF2D9
+Alumno --> Sistema : Solicitudes, inscripciones,\nconsultas y revisiones
+Sistema --> Alumno : Horarios, exámenes,\ncalificaciones y avisos
+Profesor --> Sistema : Captura de calificaciones,\nactas y consultas
+Sistema --> Profesor : Grupos, alumnos,\ncalendarios y estados
+Control --> Sistema : Gestión escolar,\nvalidación de actas
+Sistema --> Control : Registros, actas\ny reportes
+Coord --> Sistema : Reglas de evaluación,\nautorizaciones y supervisión
+Sistema --> Coord : Indicadores, reportes\ny solicitudes
+Sistema --> Identidad : Solicitar validación\nde identidad [HTTPS]
+Identidad --> Sistema : Resultado de validación
+Sistema --> Correo : Solicitar envío de avisos\n[HTTPS/SMTP]
+Correo --> Sistema : Estado de entrega
+note bottom of Sistema
+  La base de datos interna NO se representa como sistema externo.
+  Los servicios externos mostrados son opcionales y requieren validación.
+end note
+@enduml
