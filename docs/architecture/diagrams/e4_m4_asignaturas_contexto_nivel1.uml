@@ -1,0 +1,78 @@
+@startuml
+
+title Nivel 1 - Módulo Asignaturas/Materias
+
+left to right direction
+skinparam shadowing false
+skinparam roundcorner 15
+skinparam defaultTextAlignment center
+skinparam componentStyle rectangle
+
+actor "Alumno" as Alumno
+actor "Docente" as Docente
+actor "Coordinador de\nla carrera" as Coordinador
+
+component "Módulo\nAlumnos" as MAlumnos #F2F4F4
+component "Módulo Inscripciones\ny Periodos" as MInscripciones #F2F4F4
+component "Módulo\nCalificaciones" as MCalificaciones #F2F4F4
+
+rectangle "Repositorio institucional\nde temarios\n(Propuesta)" as Repositorio #FCF3CF
+
+frame "Sistema de Gestión Académica\nMódulo Asignaturas/Materias" {
+
+    rectangle "Interfaz Web\n(Front-end)" as Frontend #D6EAF8
+    rectangle "API REST\n(Back-end)" as API #D6EAF8
+
+    frame "Subsistemas funcionales" {
+        rectangle "Consulta de\nasignaturas" as Consulta #EBF5FB
+        rectangle "Trayectoria y\nplan de estudios" as Trayectoria #EBF5FB
+        rectangle "Gestión\nacadémica" as Gestion #EBF5FB
+        rectangle "Gestión de\ntemarios" as Temarios #EBF5FB
+    }
+
+    database "Base de Datos\nAcadémica" as DB #F9E79F
+}
+
+Alumno --> Frontend : consultar avance,\nmapa curricular y asignaturas
+Alumno --> Frontend : buscar asignaturas y\nconsultar temarios
+
+Docente --> Frontend : consultar temarios e\ninformación académica
+
+Coordinador --> Frontend : administrar asignaturas,\nseriación y plan de estudios
+
+Frontend --> API : HTTPS / REST / JSON
+
+API --> Consulta : solicitudes de consulta\nde asignaturas
+API --> Trayectoria : solicitudes de trayectoria\ny plan de estudios
+API --> Gestion : solicitudes de gestión\nacadémica
+API --> Temarios : solicitudes sobre\ntemarios
+
+Consulta --> DB : SQL
+Trayectoria --> DB : SQL
+Gestion --> DB : SQL
+Temarios --> DB : SQL
+
+MAlumnos --> Trayectoria : programa educativo\ny plan del alumno
+MCalificaciones --> Trayectoria : estado de\nacreditación
+MInscripciones --> Trayectoria : periodo actual e\ninscripción vigente
+
+Temarios ..> Repositorio : consulta / registro\nde temarios
+Repositorio ..> Temarios : archivo o enlace\ninstitucional
+
+note top of Frontend
+  Presenta las pantallas de consulta
+  y administración del módulo.
+end note
+
+note top of API
+  Recibe las solicitudes y las dirige
+  al subsistema correspondiente.
+end note
+
+note top of DB
+  Almacena asignaturas, seriación,
+  planes de estudio y referencias
+  de temarios.
+end note
+
+@enduml

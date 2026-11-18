@@ -1,0 +1,79 @@
+@startuml
+title E4 - Control Escolar - Contexto Nivel 0
+
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName Segoe UI
+skinparam actorStyle awesome
+skinparam roundCorner 12
+skinparam nodesep 80
+skinparam ranksep 90
+skinparam linetype spline
+
+skinparam rectangle {
+  BackgroundColor #F7FAFC
+  BorderColor #245A7A
+  FontColor #173042
+}
+
+skinparam arrow {
+  Color #315D73
+  FontColor #173042
+  Thickness 1.5
+}
+
+skinparam note {
+  BackgroundColor #FFF7E6
+  BorderColor #B7791F
+}
+
+actor "Alumno" as Alumno
+actor "Docente" as Docente
+actor "Coordinador de\nla carrera" as Coordinador
+actor "Personal de\nControl Escolar" as Control
+
+rectangle "Sistema de Control Escolar (SCE)\n\nIntegra procesos académicos,\nadministrativos y de consulta." as Sistema #EAF3F8
+
+rectangle "Servicio bancario externo\n(Pasarela de pago)" as Banco #FFF2D9
+rectangle "Servicio de correo /\nnotificaciones\n(Propuesta)" as Correo #FFF2D9
+rectangle "Repositorio institucional\nde temarios\n(Propuesta)" as Temarios #FFF2D9
+
+Alumno -[hidden]right-> Docente
+Coordinador -[hidden]right-> Control
+Banco -[hidden]down-> Correo
+Correo -[hidden]down-> Temarios
+
+Alumno --> Sistema : consultas, solicitudes\ny datos académicos
+Sistema --> Alumno : horarios, trayectoria,\ninscripciones y resultados
+
+Docente --> Sistema : captura / consulta\nacadémica
+Sistema --> Docente : grupos,\nasignaturas y cursos
+
+Coordinador --> Sistema : gestión curricular\ny académica
+Sistema --> Coordinador : plan de estudios,\nasignaturas y seriación
+
+Control --> Sistema : gestión de procesos\nescolares
+Sistema --> Control : reportes,\ncatálogos e info.\nadministrativa
+
+Sistema --> Banco : referencia / solicitud\nde pago
+Banco --> Sistema : confirmación o\nestado del pago
+
+Sistema ..> Correo : solicitud de envío\nde aviso o confirmación
+Correo ..> Sistema : estado de envío\no entrega
+
+Sistema ..> Temarios : consulta o registro\nde temario
+Temarios ..> Sistema : archivo o enlace\ninstitucional
+
+note right of Correo
+Propuesta:
+servicio externo para avisos
+y confirmaciones automáticas.
+end note
+
+note right of Temarios
+Propuesta:
+repositorio institucional
+independiente para temarios.
+end note
+
+@enduml
