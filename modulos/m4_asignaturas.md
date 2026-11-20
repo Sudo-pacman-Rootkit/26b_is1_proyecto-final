@@ -119,6 +119,90 @@ Representa los componentes que participan en las funcionalidades del módulo y s
 
 Representa el flujo de acciones y decisiones de cada funcionalidad. Se muestra un diagrama por cada caso de uso.
 
+## Alumno
+
+### UC01: Consultar mapa curricular
+
+**Código fuente:** [Diagrama de actividades UC01](../docs/architecture/diagrams/e4_m4_uc01_diagrama_actividad.uml)
+
+![Diagrama de actividades - UC01: Consultar mapa curricular](../docs/architecture/diagrams/e4_m4_uc01_diagrama_actividad.png)
+
+### UC02: Consultar avance curricular
+
+**Código fuente:** [Diagrama de actividades UC02](../docs/architecture/diagrams/e4_m4_uc02_diagrama_actividad.uml)
+
+![Diagrama de actividades - UC02: Consultar avance curricular](../docs/architecture/diagrams/e4_m4_uc02_diagrama_actividad.png)
+
+### UC03: Consultar asignaturas sugeridas
+
+**Código fuente:** [Diagrama de actividades UC03](../docs/architecture/diagrams/e4_m4_uc03_diagrama_actividad.uml)
+
+![Diagrama de actividades - UC03: Consultar asignaturas sugeridas](../docs/architecture/diagrams/e4_m4_uc03_diagrama_actividad.png)
+
+### UC05: Buscar y filtrar asignaturas
+
+**Código fuente:** [Diagrama de actividades UC05](../docs/architecture/diagrams/e4_m4_uc05_diagrama_actividad.uml)
+
+![Diagrama de actividades - UC05: Buscar y filtrar asignaturas](../docs/architecture/diagrams/e4_m4_uc05_diagrama_actividad.png)
+
+## Alumno y Docente
+
+### UC04: Consultar información de asignatura
+
+**Código fuente:** [Diagrama de actividades UC04](../docs/architecture/diagrams/e4_m4_uc04_diagrama_actividad.uml)
+
+![Diagrama de actividades - UC04: Consultar información de asignatura](../docs/architecture/diagrams/e4_m4_uc04_diagrama_actividad.png)
+
+### UC06: Consultar temario de asignatura
+
+**Código fuente:** [Diagrama de actividades UC06](../docs/architecture/diagrams/e4_m4_uc06_diagrama_actividad.uml)
+
+![Diagrama de actividades - UC06: Consultar temario de asignatura](../docs/architecture/diagrams/e4_m4_uc06_diagrama_actividad.png)
+
+## Coordinador de la carrera
+
+### UC07: Registrar asignatura
+
+**Código fuente:** [Diagrama de actividades UC07](../docs/architecture/diagrams/e4_m4_uc07_diagrama_actividad.uml)
+
+![Diagrama de actividades - UC07: Registrar asignatura](../docs/architecture/diagrams/e4_m4_uc07_diagrama_actividad.png)
+
+### UC08: Modificar asignatura
+
+**Código fuente:** [Diagrama de actividades UC08](../docs/architecture/diagrams/e4_m4_uc08_diagrama_actividad.uml)
+
+![Diagrama de actividades - UC08: Modificar asignatura](../docs/architecture/diagrams/e4_m4_uc08_diagrama_actividad.png)
+
+### UC09: Activar o desactivar asignatura
+
+**Código fuente:** [Diagrama de actividades UC09](../docs/architecture/diagrams/e4_m4_uc09_diagrama_actividad.uml)
+
+![Diagrama de actividades - UC09: Activar o desactivar asignatura](../docs/architecture/diagrams/e4_m4_uc09_diagrama_actividad.png)
+
+### UC10: Definir datos académicos
+
+**Código fuente:** [Diagrama de actividades UC10](../docs/architecture/diagrams/e4_m4_uc10_diagrama_actividad.uml)
+
+![Diagrama de actividades - UC10: Definir datos académicos](../docs/architecture/diagrams/e4_m4_uc10_diagrama_actividad.png)
+
+### UC11: Definir seriación
+
+**Código fuente:** [Diagrama de actividades UC11](../docs/architecture/diagrams/e4_m4_uc11_diagrama_actividad.uml)
+
+![Diagrama de actividades - UC11: Definir seriación](../docs/architecture/diagrams/e4_m4_uc11_diagrama_actividad.png)
+
+### UC12: Gestionar plan de estudios y mapa curricular
+
+**Código fuente:** [Diagrama de actividades UC12](../docs/architecture/diagrams/e4_m4_uc12_diagrama_actividad.uml)
+
+![Diagrama de actividades - UC12: Gestionar plan de estudios y mapa curricular](../docs/architecture/diagrams/e4_m4_uc12_diagrama_actividad.png)
+
+### UC13: Registrar temario de asignatura
+
+**Código fuente:** [Diagrama de actividades UC13](../docs/architecture/diagrams/e4_m4_uc13_diagrama_actividad.uml)
+
+![Diagrama de actividades - UC13: Registrar temario de asignatura](../docs/architecture/diagrams/e4_m4_uc13_diagrama_actividad.png)
+
 # Diagrama de secuencia
 
 Representa el orden de interacción entre los actores y componentes del sistema. Se muestra un diagrama por cada caso de uso.
