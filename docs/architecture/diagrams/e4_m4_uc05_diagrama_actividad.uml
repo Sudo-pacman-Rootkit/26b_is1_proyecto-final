@@ -1,0 +1,59 @@
+@startuml
+title M4 - UC05 - Buscar y filtrar asignaturas
+
+skinparam shadowing false
+skinparam roundcorner 12
+
+start
+
+:Usuario abre la búsqueda
+de asignaturas;
+
+:Ingresar texto de búsqueda
+y/o seleccionar filtros;
+
+:Considerar criterios como
+clave, nombre, periodo escolar,
+área, núcleo o carácter;
+
+:Consultar el catálogo
+de asignaturas;
+
+:Aplicar los criterios
+seleccionados;
+
+if (¿Existen resultados?) then (Sí)
+
+  :Ordenar y mostrar
+  las asignaturas encontradas;
+
+  if (¿Usuario desea cambiar los filtros?) then (Sí)
+
+    :Modificar criterios
+    de búsqueda;
+
+    :Aplicar nuevamente
+    los filtros;
+
+    :Mostrar resultados
+    actualizados;
+
+  else (No)
+
+    :Mantener resultados
+    mostrados;
+
+  endif
+
+else (No)
+
+  :Mostrar mensaje
+  "No se encontraron asignaturas";
+
+  :Permitir modificar
+  los criterios de búsqueda;
+
+endif
+
+stop
+@enduml

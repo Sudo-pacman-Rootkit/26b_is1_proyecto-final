@@ -1,0 +1,44 @@
+@startuml
+title M4 - UC01 - Consultar mapa curricular
+
+skinparam shadowing false
+skinparam roundcorner 12
+
+start
+
+:Alumno selecciona
+"Mapa curricular";
+
+:Identificar el programa educativo
+y plan de estudios del alumno;
+
+if (¿Existe un plan de estudios asociado?) then (Sí)
+
+  :Consultar las asignaturas
+  pertenecientes al plan;
+
+  :Consultar periodo escolar,
+  núcleo, carácter y seriación
+  de las asignaturas;
+
+  :Organizar las asignaturas
+  por periodo escolar;
+
+  :Relacionar asignaturas
+  antecedentes y consecuentes;
+
+  :Construir la representación
+  del mapa curricular;
+
+  :Mostrar mapa curricular
+  al alumno;
+
+else (No)
+
+  :Mostrar mensaje
+  "No se encontró un plan de estudios asociado";
+
+endif
+
+stop
+@enduml

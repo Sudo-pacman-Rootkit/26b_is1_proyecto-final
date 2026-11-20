@@ -1,0 +1,45 @@
+@startuml
+title M4 - UC04 - Consultar información de asignatura
+
+skinparam shadowing false
+skinparam roundcorner 12
+
+start
+
+:Usuario selecciona
+una asignatura;
+
+:Buscar la asignatura
+en el catálogo;
+
+if (¿La asignatura existe?) then (Sí)
+
+  :Obtener clave y nombre;
+
+  :Obtener horas teóricas,
+  horas prácticas y total de horas;
+
+  :Obtener créditos,
+  carácter y tipo;
+
+  :Obtener periodo escolar,
+  área curricular y núcleo;
+
+  :Obtener seriación,
+  formación común y espacios académicos;
+
+  :Obtener estado
+  de la asignatura;
+
+  :Mostrar la información
+  académica completa;
+
+else (No)
+
+  :Mostrar mensaje
+  "Asignatura no encontrada";
+
+endif
+
+stop
+@enduml

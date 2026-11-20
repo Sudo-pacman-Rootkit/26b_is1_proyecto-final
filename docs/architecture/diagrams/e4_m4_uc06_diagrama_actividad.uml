@@ -1,0 +1,55 @@
+@startuml
+title M4 - UC06 - Consultar temario de asignatura
+
+skinparam shadowing false
+skinparam roundcorner 12
+
+start
+
+:Usuario selecciona
+una asignatura;
+
+:Seleccionar
+"Consultar temario";
+
+:Verificar que la asignatura
+exista en el catálogo;
+
+if (¿La asignatura existe?) then (Sí)
+
+  :Consultar la referencia
+  del temario o programa de estudios;
+
+  if (¿Existe un temario registrado?) then (Sí)
+
+    :Obtener archivo o
+    enlace institucional;
+
+    if (¿La referencia está disponible?) then (Sí)
+
+      :Mostrar o abrir
+      el temario al usuario;
+
+    else (No)
+
+      :Mostrar mensaje
+      "El recurso no se encuentra disponible";
+
+    endif
+
+  else (No)
+
+    :Mostrar mensaje
+    "No hay temario registrado";
+
+  endif
+
+else (No)
+
+  :Mostrar mensaje
+  "Asignatura no encontrada";
+
+endif
+
+stop
+@enduml
