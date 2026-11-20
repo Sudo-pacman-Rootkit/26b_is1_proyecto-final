@@ -15,11 +15,11 @@ skinparam class {
 class Usuario {
     - nombreCompleto:String
     - correo :String
-    - contrasena :String
-    + iniciarSesion() :void
-    + cerrarSesion() : void
-    + cambiarContrasena() : void
-    + recuperarContrasena() : void
+    - hashContrasena :String
+   + iniciarSesion() :void
+   + cerrarSesion() : void
+   + cambiarContrasena() : void
+   + solicitarRestablecimientoContrasena() : void
 }
 
 class Alumno {
