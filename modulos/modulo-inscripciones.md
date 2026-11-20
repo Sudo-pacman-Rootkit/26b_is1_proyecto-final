@@ -68,8 +68,6 @@ CU8 ..> CU3 : <<extend>>
 @enduml
 ```
 ![Diagrama de casos de uso](/resources/imgs/m2_inscripciones_casos_uso.png)
-
-
 ### 5.3 diagramas de actividades
 5.3.1 consultar oferta academica
 ```plantuml
@@ -129,7 +127,6 @@ stop
 @enduml
 ```
 ![Diagrama de casos de uso](/resources/imgs/m2_c2.png)
-
 5.3.3 confirmar inscripción
 ```plantuml
 @startuml
@@ -352,7 +349,7 @@ endif
 stop
 @enduml
 ```
-
+![Diagrama de casos de uso](/resources/imgs/m2_c9.png)
 5.3.10 validar requisitos académicos
 ```plantuml
 @startuml
@@ -379,6 +376,7 @@ endif
 stop
 @enduml
 ```
+![Diagrama de casos de uso](/resources/imgs/m2_c10.png)
 5.3.11 consultar estado de inscripción 
 ```plantuml
 @startuml
@@ -401,6 +399,7 @@ endif
 stop
 @enduml
 ```
+![Diagrama de casos de uso](/resources/imgs/m2_c11.png)
 5.3.12 confirmar inscripción
 ```plantuml
 @startuml
