@@ -1,0 +1,23 @@
+@startuml
+title M4 - Definir datos académicos de la asignatura
+actor "Coordinador de la carrera" as Coord
+boundary "Interfaz de gestión académica" as UI
+control "Controlador de asignaturas" as C
+entity "Gestor de asignaturas" as S
+database "Base de datos" as BD
+
+Coord -> UI: Capturar créditos, carácter,\nnúcleo y periodo
+UI -> C: Enviar datos académicos
+C -> S: Validar datos de la asignatura
+S -> S: Verificar campos y valores requeridos
+alt Datos válidos
+  S -> BD: Actualizar datos académicos
+  BD --> S: Confirmación
+  S --> C: Datos guardados
+  C --> UI: Mostrar confirmación
+else Datos inválidos
+  S --> C: Errores de validación
+  C --> UI: Solicitar correcciones
+end
+UI --> Coord: Mostrar resultado
+@enduml

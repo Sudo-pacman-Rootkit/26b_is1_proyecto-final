@@ -1,0 +1,17 @@
+@startuml
+title M4 - Consultar mapa curricular
+actor Alumno
+boundary "Interfaz de asignaturas" as UI
+control "Controlador curricular" as C
+entity "Servicio de planes de estudio" as S
+database "Base de datos" as BD
+
+Alumno -> UI: Solicitar mapa curricular
+UI -> C: Consultar mapa del plan vigente
+C -> S: Obtener mapa(idPlan)
+S -> BD: Consultar periodos y asignaturas del plan
+BD --> S: Estructura curricular
+S --> C: Mapa curricular
+C --> UI: Presentar mapa curricular
+UI --> Alumno: Visualizar asignaturas por periodo
+@enduml

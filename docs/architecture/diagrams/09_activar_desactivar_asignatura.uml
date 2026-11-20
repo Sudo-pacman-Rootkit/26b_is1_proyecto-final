@@ -1,0 +1,19 @@
+@startuml
+title M4 - Activar o desactivar asignatura
+actor "Coordinador de la carrera" as Coord
+boundary "Interfaz de gestión académica" as UI
+control "Controlador de asignaturas" as C
+entity "Gestor de asignaturas" as S
+database "Base de datos" as BD
+
+Coord -> UI: Seleccionar asignatura y cambiar estado
+UI -> C: Solicitar cambio de estado
+C -> S: CambiarEstado(idAsignatura, estado)
+S -> BD: Consultar asignatura
+BD --> S: Registro actual
+S -> BD: Actualizar estado sin eliminar historial
+BD --> S: Confirmación
+S --> C: Estado actualizado
+C --> UI: Mostrar nuevo estado
+UI --> Coord: Confirmar activación o desactivación
+@enduml

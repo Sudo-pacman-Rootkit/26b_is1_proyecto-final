@@ -1,0 +1,28 @@
+@startuml
+title M4 - Consultar temario de asignatura
+actor Alumno
+actor Docente
+boundary "Interfaz de asignaturas" as UI
+control "Controlador de asignaturas" as C
+entity "Gestor de temarios" as G
+database "Base de datos" as BD
+
+Alumno -> UI: Seleccionar asignatura y consultar temario
+Docente -> UI: Seleccionar asignatura y consultar temario
+UI -> C: Solicitar temario(idAsignatura)
+C -> G: Buscar temario por asignatura
+G -> BD: Consultar archivo o enlace registrado
+BD --> G: Datos del temario
+
+alt Temario disponible
+  G --> C: Devolver temario o enlace
+  C --> UI: Mostrar acceso al programa
+  UI --> Alumno: Consultar temario
+  UI --> Docente: Consultar temario
+else Temario no disponible
+  G --> C: Informar que no existe temario
+  C --> UI: Mostrar aviso de disponibilidad
+  UI --> Alumno: Ver aviso
+  UI --> Docente: Ver aviso
+end
+@enduml

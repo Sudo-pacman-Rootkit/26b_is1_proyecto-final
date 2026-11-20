@@ -1,0 +1,23 @@
+@startuml
+title M4 - Registrar temario de asignatura
+actor "Coordinador de la carrera" as Coord
+boundary "Interfaz de gestión académica" as UI
+control "Controlador de asignaturas" as C
+entity "Gestor de temarios" as G
+database "Base de datos" as BD
+
+Coord -> UI: Seleccionar asignatura y adjuntar archivo\n o capturar enlace institucional
+UI -> C: Enviar temario y asignatura
+C -> G: Validar y registrar temario
+G -> G: Verificar archivo o enlace
+alt Recurso válido
+  G -> BD: Guardar referencia del temario
+  BD --> G: Confirmación
+  G --> C: Temario registrado
+  C --> UI: Mostrar confirmación
+else Recurso inválido
+  G --> C: Informar error
+  C --> UI: Mostrar mensaje de validación
+end
+UI --> Coord: Informar resultado
+@enduml

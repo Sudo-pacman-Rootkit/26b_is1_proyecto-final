@@ -1,0 +1,25 @@
+@startuml
+title M4 - Definir seriación
+actor "Coordinador de la carrera" as Coord
+boundary "Interfaz de gestión académica" as UI
+control "Controlador de asignaturas" as C
+entity "Gestor de seriación" as S
+database "Base de datos" as BD
+
+Coord -> UI: Elegir asignatura y definir prerrequisitos
+UI -> C: Enviar relación de seriación
+C -> S: Validar seriación
+S -> BD: Consultar asignaturas y seriaciones existentes
+BD --> S: Datos relacionados
+S -> S: Verificar que la relación sea válida
+alt Seriación válida
+  S -> BD: Guardar prerrequisitos
+  BD --> S: Confirmación
+  S --> C: Seriación registrada
+  C --> UI: Mostrar confirmación
+else Datos inválidos
+  S --> C: Reportar error de validación
+  C --> UI: Mostrar errores
+end
+UI --> Coord: Informar resultado
+@enduml
