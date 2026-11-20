@@ -338,11 +338,100 @@ deactivate UI
 
 ## Diagrama de estados
 
-Nota: Generar 1 diagrama de estados para objetos o clases involucradas.
+### Diagrama 1: Estados de ventana de Captura de calificaiones
+```plantuml
+@startuml
+!pragma layout smetana
+title Estados de la Ventana de Captura de Calificaciones
 
-{codigo fuente uml, coloca un link que haga referencia al archvio que contiene el codigo fuente}
-{imagen visible}
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam roundCorner 12
+skinparam ArrowColor #444444
+skinparam stateBackgroundColor #EAF2FB
+skinparam stateBorderColor #2F5D8A
+skinparam noteBackgroundColor #FFF7E6
+skinparam noteBorderColor #B7791F
 
+state "Programada" as Programada
+state "Habilitada" as Habilitada
+state "Cerrada" as Cerrada
+
+[*] --> Programada : el Administrador configura\nla ventana de captura
+
+Programada --> Habilitada : inicia la captura\n[fecha actual >= inicio]
+
+Habilitada --> Cerrada : termina el plazo\n[fecha actual >= fin]
+
+Cerrada --> [*]
+
+note right of Programada
+  El intervalo de captura
+  ya se encuentra definido.
+end note
+
+note right of Habilitada
+  Los profesores autorizados
+  pueden registrar
+  calificaciones.
+end note
+
+note right of Cerrada
+  La captura ordinaria
+  queda restringida.
+end note
+@enduml
+```
+![Diagrama de estados](resources/imgs/m02_periodo_estados_1.png)
+### Diagrama 2: Estados de ventana de Inscripción
+```plantuml
+@startuml
+!pragma layout smetana
+title Estados de la Ventana de Inscripción
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam roundCorner 12
+skinparam ArrowColor #444444
+skinparam stateBackgroundColor #EAF2FB
+skinparam stateBorderColor #2F5D8A
+skinparam noteBackgroundColor #FFF7E6
+skinparam noteBorderColor #B7791F
+
+state "Programada" as Programada
+state "Abierta" as Abierta
+state "Cerrada" as Cerrada
+
+[*] --> Programada : el Administrador configura\nlas fechas de inscripción
+
+Programada --> Abierta : inicia la ventana\n[fecha actual >= inicio]
+
+Abierta --> Cerrada : termina la ventana\n[fecha actual >= fin]
+
+Cerrada --> [*]
+
+note right of Programada
+  Las fechas están definidas,
+  pero todavía no se permiten
+  inscripciones.
+end note
+
+note right of Abierta
+  El módulo Inscripciones
+  puede aceptar solicitudes
+  de alumnos autorizados.
+end note
+
+note right of Cerrada
+  No se permiten nuevas
+  inscripciones ordinarias
+  dentro de esta ventana.
+end note
+@enduml
+```
+![Diagrama de estados](resources/imgs/m02_periodo_estados_2.png)
 ## Diagrama de clases
 
 {codigo fuente uml, coloca un link que haga referencia al archvio que contiene el codigo fuente}
