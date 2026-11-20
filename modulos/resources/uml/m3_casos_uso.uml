@@ -1,0 +1,54 @@
+@startuml
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam ArrowColor #42556A
+skinparam BorderColor #42556A
+skinparam dpi 150
+skinparam roundcorner 8
+skinparam sequence {
+  ParticipantBackgroundColor #F1F4F7
+  ParticipantBorderColor #42556A
+  LifeLineBorderColor #7B8794
+  ActorBorderColor #42556A
+  GroupBackgroundColor #FAFBFC
+  GroupHeaderFontColor #253746
+}
+skinparam activity {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+  DiamondBackgroundColor #FFFFFF
+  DiamondBorderColor #42556A
+}
+skinparam state {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+}
+skinparam class {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+}
+
+title Profesores: casos de uso
+
+left to right direction
+skinparam nodesep 25
+skinparam ranksep 35
+actor "Administrador\nescolar" as Admin
+actor "Profesor" as Prof
+rectangle "Módulo Profesores" {
+ usecase "UC1\nRegistrar profesor" as UC1
+ usecase "UC2\nConsultar profesores" as UC2
+ usecase "UC3\nModificar datos\ndel profesor" as UC3
+ usecase "UC4\nDar de baja profesor" as UC4
+ usecase "UC5\nConsultar perfil propio" as UC5
+ usecase "UC6\nActualizar datos\npersonales" as UC6
+}
+Admin -- UC1
+Admin -- UC2
+Admin -- UC3
+Admin -- UC4
+Prof -- UC5
+Prof -- UC6
+@enduml

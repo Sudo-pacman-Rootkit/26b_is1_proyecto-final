@@ -1,0 +1,62 @@
+@startuml
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam ArrowColor #42556A
+skinparam BorderColor #42556A
+skinparam dpi 150
+skinparam roundcorner 8
+skinparam sequence {
+  ParticipantBackgroundColor #F1F4F7
+  ParticipantBorderColor #42556A
+  LifeLineBorderColor #7B8794
+  ActorBorderColor #42556A
+  GroupBackgroundColor #FAFBFC
+  GroupHeaderFontColor #253746
+}
+
+title UC5. Consultar perfil propio: secuencia
+hide footbox
+skinparam sequenceMessageAlign center
+
+actor "Profesor" as Actor
+boundary "Vista de\nProfesores" as Vista
+control "Control de\nProfesores" as Control
+participant "Acceso\ncompartido" as Acceso
+database "Registro de\nprofesores" as Registro
+
+Actor -> Vista : Solicitar consulta de su perfil
+Vista -> Control : consultarMiPerfil()
+Control -> Acceso : comprobarAcceso(operación, sesión)
+Acceso --> Control : permiso y vínculo docente, si existe
+alt acceso no autorizado
+  Control --> Vista : acceso rechazado
+  Vista --> Actor : informar rechazo
+else acceso autorizado
+  alt cuenta sin vínculo con perfil docente
+    Control --> Vista : perfil no vinculado
+    Vista --> Actor : informar falta de vínculo
+  else vínculo docente disponible
+    Control -> Registro : obtenerProfesor(profesorDeSesion)
+    alt registro encontrado
+      Registro --> Control : datos del perfil
+      Control --> Vista : perfil autorizado
+      Vista --> Actor : mostrar su perfil
+    else vínculo sin registro docente
+      Registro --> Control : registro no encontrado
+      Control --> Vista : inconsistencia de vínculo
+      Vista --> Actor : informar que el perfil no está disponible
+    else fallo de lectura
+      Registro --> Control : error de consulta
+      Control --> Vista : consulta no disponible
+      Vista --> Actor : informar fallo de consulta
+    end
+  end
+end
+
+note over Acceso, Control
+  El vínculo cuenta-perfil está por acordar con E1.
+  No se acepta un identificador libre para consultar a otro profesor.
+end note
+@enduml

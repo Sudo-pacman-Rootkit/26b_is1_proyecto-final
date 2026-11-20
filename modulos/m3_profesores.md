@@ -119,3 +119,7 @@ Prof -- UC6
 | RNF-05 | Integridad | Los datos de profesores dados de baja deben conservarse; no se eliminan físicamente. |
 | RNF-06 | Privacidad | Los datos personales de los profesores deben tratarse de forma confidencial. |
 | RNF-07 | Disponibilidad | El módulo debe estar disponible durante el horario de operación de la institución. (*) |
+
+## 8. Modelado detallado
+
+- [Bloque C: consultar y actualizar el perfil propio de profesores](profesores/bloque_c.md). Incluye contexto, fuentes UML e imágenes de cinco diagramas.
