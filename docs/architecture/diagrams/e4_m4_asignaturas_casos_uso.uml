@@ -1,0 +1,62 @@
+@startuml
+
+title Módulo 4. Asignaturas/Materias
+
+left to right direction
+skinparam shadowing false
+skinparam roundcorner 15
+
+actor "Alumno" as Alumno
+actor "Docente" as Docente
+actor "Coordinador de\nla carrera" as Coordinador
+
+rectangle "Módulo 4. Asignaturas/Materias" {
+
+    package "Trayectoria y plan de estudios" {
+        usecase "Consultar mapa\ncurricular" as UC1
+        usecase "Consultar avance\ncurricular" as UC2
+        usecase "Consultar asignaturas sugeridas\npara el siguiente periodo" as UC3
+    }
+
+    package "Consulta de asignaturas" {
+        usecase "Consultar información\nde asignatura" as UC4
+        usecase "Buscar y filtrar\nasignaturas" as UC5
+        usecase "Consultar temario\nde asignatura" as UC6
+    }
+
+    package "Gestión académica" {
+        usecase "Registrar\nasignatura" as UC7
+        usecase "Modificar\nasignatura" as UC8
+        usecase "Activar o desactivar\nasignatura" as UC9
+        usecase "Definir datos académicos\nde la asignatura" as UC10
+        usecase "Definir seriación" as UC11
+        usecase "Gestionar plan de estudios\ny mapa curricular" as UC12
+        usecase "Registrar temario\nde asignatura" as UC13
+    }
+}
+
+Alumno --> UC1
+Alumno --> UC2
+Alumno --> UC3
+Alumno --> UC4
+Alumno --> UC5
+Alumno --> UC6
+
+Docente --> UC4
+Docente --> UC6
+
+Coordinador --> UC7
+Coordinador --> UC8
+Coordinador --> UC9
+Coordinador --> UC10
+Coordinador --> UC11
+Coordinador --> UC12
+Coordinador --> UC13
+
+note right of UC6
+  Propuesta de mejora:
+  permitir consultar directamente
+  el temario o programa de la asignatura.
+end note
+
+@enduml
