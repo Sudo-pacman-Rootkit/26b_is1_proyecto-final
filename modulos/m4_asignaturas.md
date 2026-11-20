@@ -48,7 +48,7 @@ Cada asignatura posee información que permite identificarla, conocer su carga a
 | **Créditos** | Número entero | Valor académico asignado a la unidad de aprendizaje. | Debe corresponder al valor definido en el plan de estudios. |
 | **Carácter** | Catálogo | Clasificación de la asignatura. **Ejemplo:** Obligatoria u optativa. | Debe pertenecer a los valores definidos por el plan. |
 | **Tipo** | Catálogo | Forma académica de la unidad de aprendizaje. **Ejemplo:** Curso, taller o curso-taller. | Debe corresponder a un tipo válido. |
-| **Periodo escolar** | Periodo del plan de estudios en el que se ubica una asignatura, por ejemplo Séptimo u Octavo. | Periodo del plan en el que se ubica la asignatura. **Ejemplo:** Séptimo u Octavo. | Debe corresponder a la estructura del plan de estudios. |
+| **Periodo escolar** | Catálogo | Periodo del plan en el que se ubica la asignatura. **Ejemplo:** Séptimo u Octavo. | Debe corresponder a la estructura del plan de estudios. |
 | **Área curricular** | Catálogo | Área académica o disciplinaria a la que pertenece la asignatura. **Ejemplo:** Ciencias Sociales y Humanidades. | Debe estar definida dentro del programa educativo. |
 | **Núcleo de formación** | Catálogo | Clasificación de la asignatura dentro del plan. **Ejemplo:** Básico, sustantivo o integral. | Debe pertenecer a los núcleos definidos por el plan. |
 | **U.A. antecedente** | Referencia a asignatura | Unidad de aprendizaje que antecede a otra dentro de una relación de seriación. | Puede no existir. |
@@ -145,7 +145,6 @@ Representa las clases principales del módulo, sus atributos y las relaciones en
 | **Tipo** | Forma académica de una unidad de aprendizaje, por ejemplo curso, taller o curso-taller. |
 | **Área curricular** | Área académica o disciplinaria a la que pertenece una asignatura. |
 | **Núcleo de formación** | Clasificación de una unidad de aprendizaje dentro de los núcleos básico, sustantivo o integral. |
-| **Periodo escolar** | Periodo del plan de estudios en el que se ubica una asignatura, por ejemplo Séptimo u Octavo. |
 | **Periodo escolar** | Periodo del plan de estudios en el que se ubica una asignatura, por ejemplo Séptimo u Octavo. |
 | **Temario / Programa de estudios** | Documento institucional que contiene la identificación, objetivos, contenidos y organización de una unidad de aprendizaje. |
 | **Avance curricular** | Progreso del alumno dentro de su plan de estudios de acuerdo con el estado de sus asignaturas. |
