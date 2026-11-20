@@ -36,6 +36,27 @@
 
 {TODO - vista general de los modulos - diagrama de componentes}
 
+### Diagrama de clases — Equipo 6 (Registro de Calificaciones y Catálogo de Exámenes)
+
+El proyecto lleva un solo diagrama de clases. Esta es la parte del Equipo 6: muestra las clases de Registro de
+Calificaciones (Acta, Calificacion, Asistencia y SolicitudRevision) y de Catálogo de Exámenes (TipoExamen), con sus
+atributos (`-`, privados) y operaciones (`+`, públicas). El rombo negro (composición) indica que las calificaciones no
+existen sin su acta. En gris aparecen las clases de otros módulos con las que se conectan (Alumno, Grupo y
+ExamenProgramado), para unirlo al diagrama general.
+
+Código fuente: [e6_clases_calificaciones_catalogo.uml](./docs/architecture/diagrams/e6_clases_calificaciones_catalogo.uml)
+
+![Diagrama de clases del Equipo 6](./docs/architecture/diagrams/e6_clases_calificaciones_catalogo.png)
+
+### Modelo entidad-relación — Equipo 6
+
+Muestra las tablas que guardan los datos de Registro de Calificaciones y Catálogo de Exámenes y cómo se relacionan.
+Las tablas en gris (alumno y grupo) pertenecen a otros módulos.
+
+Código fuente: [e6_er_calificaciones_catalogo.uml](./docs/architecture/diagrams/e6_er_calificaciones_catalogo.uml)
+
+![Modelo entidad-relación del Equipo 6](./docs/architecture/diagrams/e6_er_calificaciones_catalogo.png)
+
 ## 5.2 Interfaz de usuario (mockups, wireframes)
 
 # Índice de Módulos
@@ -52,4 +73,4 @@
 
 # Nomenclaturas
 
-# Referencias bibliográficas 
+# Referencias bibliográficas
