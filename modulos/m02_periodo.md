@@ -67,12 +67,195 @@ Alumno --> UC3
 
 ![Diagrama de Casos de Uso](resources/imgs/m02_periodo_casos_uso.png)
 
-## Diagrama de componentes
+## Diagrama de Actividades
 
-Nota: Generar 1 diagrama de componentes por cada caso de uso.
+### UC01: Registrar Nuevo PeriodoEscolar
+```plantuml
+@startuml
+title Diagrama de Actividad - UC01: Registrar Nuevo PeriodoEscolar
+skinparam shadowing false
 
-{codigo fuente uml, coloca un link que haga referencia al archvio que contiene el codigo fuente}
-{imagen visible}
+|Control Escolar|
+start
+:Abrir formulario de registro de PeriodoEscolar;
+:Ingresar clave, nombre y fechas de inicio/fin;
+
+|Sistema (Módulo PeriodoEscolar)|
+:Validar formato y coherencia de fechas;
+if (¿Fechas válidas y sin traslape?) then (Sí)
+  :Verificar si la clave del PeriodoEscolar ya existe;
+  if (¿Clave disponible?) then (Sí)
+    :Guardar PeriodoEscolar con estatus PLANIFICADO;
+    |Control Escolar|
+    :Visualizar confirmación de registro;
+    stop
+  else (No)
+    |Control Escolar|
+    :Mostrar error de clave duplicada;
+    stop
+  endif
+else (No)
+  |Control Escolar|
+  :Mostrar error en rango de fechas;
+  stop
+endif
+@enduml
+```
+![Diagrama de actividad](resources/imgs/m02_periodo_actividad_UC01.png)
+### UC02: Activar PeriodoEscolar
+```plantuml
+@startuml
+title Diagrama de Actividad - UC02: Activar PeriodoEscolar
+skinparam shadowing false
+
+|Control Escolar|
+start
+:Seleccionar PeriodoEscolar en estatus PLANIFICADO;
+:Solicitar activación del PeriodoEscolar;
+
+|Sistema (Módulo PeriodoEscolar)|
+:Consultar si existe otro PeriodoEscolar en estatus ACTIVO;
+if (¿Ya existe un PeriodoEscolar activo?) then (Sí)
+  |Control Escolar|
+  :Mostrar advertencia (debe finalizarse el periodo vigente);
+  stop
+else (No)
+  :Verificar configuración mínima del PeriodoEscolar;
+  if (¿Configuración completa?) then (Sí)
+    :Cambiar estatus del PeriodoEscolar a ACTIVO;
+    |Control Escolar|
+    :Confirmar que el PeriodoEscolar está vigente;
+    stop
+  else (No)
+    |Control Escolar|
+    :Solicitar completar datos o calendarios;
+    stop
+  endif
+endif
+@enduml
+```
+![Diagrama de actividad](resources/imgs/m02_periodo_actividad_UC02.png)
+### UC03: Consultar PeriodoEscolar Activo / Histórico
+```plantuml
+@startuml
+title Diagrama de Actividad - UC03: Consultar PeriodoEscolar Activo / Histórico
+skinparam shadowing false
+
+|Control Escolar / Profesor / Alumno|
+start
+:Acceder a la consulta de PeriodoEscolar;
+:Seleccionar filtro (activo o histórico);
+
+|Sistema (Módulo PeriodoEscolar)|
+:Consultar registros de PeriodoEscolar y ventanas asociadas;
+if (¿Existen registros para el filtro seleccionado?) then (Sí)
+  |Control Escolar / Profesor / Alumno|
+  :Visualizar clave, fechas, estatus y ventanas del PeriodoEscolar;
+  stop
+else (No)
+  |Control Escolar / Profesor / Alumno|
+  :Mostrar mensaje de ausencia de registros;
+  stop
+endif
+@enduml
+```
+![Diagrama de actividad](resources/imgs/m02_periodo_actividad_UC03.png)
+### UC04: Finalizar PeriodoEscolar
+```plantuml
+@startuml
+title Diagrama de Actividad - UC04: Finalizar PeriodoEscolar
+skinparam shadowing false
+
+|Control Escolar|
+start
+:Seleccionar PeriodoEscolar ACTIVO;
+:Solicitar cierre definitivo del PeriodoEscolar;
+
+|Sistema (Módulo PeriodoEscolar)|
+:Verificar estado de VentanaCaptura y VentanaInscripcion;
+if (¿Hay ventanas o procesos abiertos?) then (Sí)
+  |Control Escolar|
+  :Bloquear cierre y mostrar ventanas pendientes;
+  stop
+else (No)
+  |Control Escolar|
+  :Confirmar cierre definitivo;
+  |Sistema (Módulo PeriodoEscolar)|
+  :Cambiar estatus del PeriodoEscolar a FINALIZADO;
+  :Archivar en historial académico;
+  |Control Escolar|
+  :Mostrar confirmación de PeriodoEscolar finalizado;
+  stop
+endif
+@enduml
+```
+![Diagrama de actividad](resources/imgs/m02_periodo_actividad_UC04.png)
+### UC05: Gestionar VentanaCaptura
+```plantuml
+@startuml
+title Diagrama de Actividad - UC05: Gestionar VentanaCaptura
+skinparam shadowing false
+
+|Control Escolar|
+start
+:Seleccionar PeriodoEscolar;
+:Abrir gestión de VentanaCaptura;
+:Definir o modificar tipo de evaluación y fechas de captura;
+
+|Sistema (Módulo PeriodoEscolar)|
+:Consultar fechas de inicio y fin del PeriodoEscolar;
+if (¿VentanaCaptura está dentro del PeriodoEscolar?) then (Sí)
+  if (¿Hay conflicto con otra VentanaCaptura del mismo tipo?) then (Sí)
+    |Control Escolar|
+    :Mostrar aviso de traslape de fechas;
+    stop
+  else (No)
+    :Guardar o actualizar VentanaCaptura;
+    |Control Escolar|
+    :Confirmar calendario de captura de calificaciones;
+    stop
+  endif
+else (No)
+  |Control Escolar|
+  :Mostrar error de fechas fuera del PeriodoEscolar;
+  stop
+endif
+@enduml
+```
+![Diagrama de actividad](resources/imgs/m02_periodo_actividad_UC05.png)
+### UC06: Gestionar VentanaInscripcion
+```plantuml
+@startuml
+title Diagrama de Actividad - UC06: Gestionar VentanaInscripcion
+skinparam shadowing false
+
+|Control Escolar|
+start
+:Seleccionar PeriodoEscolar;
+:Abrir gestión de VentanaInscripcion;
+:Definir o modificar modalidad y fechas/horas de inscripción;
+
+|Sistema (Módulo PeriodoEscolar)|
+:Consultar fechas de inicio y fin del PeriodoEscolar;
+if (¿VentanaInscripcion está dentro del PeriodoEscolar?) then (Sí)
+  if (¿Existen traslapes inválidos en VentanaInscripcion?) then (Sí)
+    |Control Escolar|
+    :Mostrar error de traslape de ventanas;
+    stop
+  else (No)
+    :Guardar o actualizar VentanaInscripcion;
+    |Control Escolar|
+    :Confirmar ventanas de inscripción disponibles;
+    stop
+  endif
+else (No)
+  |Control Escolar|
+  :Mostrar error de fechas fuera del PeriodoEscolar;
+  stop
+endif
+@enduml
+```
+![Diagrama de actividad](resources/imgs/m02_periodo_actividad_UC06.png)
 
 ## Diagrama de secuencia
 
