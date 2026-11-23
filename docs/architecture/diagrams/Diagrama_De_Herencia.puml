@@ -1,0 +1,90 @@
+
+@startuml
+
+title Diagrama de Herencia de Usuarios, Roles y Actores
+left to right direction
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam class {
+    BackgroundColor #EFF6FF
+    BorderColor #334155
+    ArrowColor #334155
+}
+
+class Usuario {
+    - nombreCompleto:String
+    - correo :String
+    - contrasena :String
+    + iniciarSesion() :void
+    + cerrarSesion() : void
+    + cambiarContrasena() : void
+    + recuperarContrasena() : void
+}
+
+class Alumno {
+    + consultarMaterias() : void
+    + gestionarInscripcion() : void
+    + consultarHorario() : void
+    + consultarCalificaciones() : void
+    + consultarHistorialAcademico() : void
+    + consultarCalendarioExamenes() : void
+    + consultarDatosPersonales() : void
+}
+
+class Profesor {
+    + consultarGrupos() : void
+    + consultarTemario() : void
+    + consultarListaAsistencia() : void
+    + capturarCalificaciones() : void
+    + cerrarActaCalificaciones() : void
+    + solicitarRectificacion() : void
+    + consultarCalendarioExamenes() : void
+    + solicitarAula() : void
+    + consultarPerfil() : void
+}
+
+class AdministradorEscolar {
+    + gestionarUsuarios() : void
+    + registrarUsuarios() : void
+    + asignarRolesPermisos() : void
+    + gestionarPeriodosEscolares() : void
+    + consultarReportesGenerales() : void
+    + supervisarModulos() : void
+    + gestionarProfesores() : void
+}
+
+class Coordinador {
+    + gestionarMaterias() : void
+    + gestionarInscripciones() : void
+    + definirPeriodoExamenes() : void
+    + asignarAulas() : void
+    + gestionarPlanEstudio() : void
+    + gestionarCalendarioExamenes() : void
+    + gestionarCatalogoExamen() : void
+    + consultarReportes() : void
+}
+
+class Secretaria {
+    + gestionarExpedientes() : void
+    + registrarDocumentos() : void
+    + emitirConstancias() : void
+    + consultarAlumnos() : void
+    + gestionarTramites() : void
+}
+
+class Directivo {
+    + consultarEstadisticas() : void
+    + consultarReportes() : void
+    + supervisarAreas() : void
+    + consultarResultadosAcademicos() : void
+}
+
+Usuario <|-- Alumno
+Usuario <|-- Profesor
+Usuario <|-- AdministradorEscolar
+Usuario <|-- Coordinador
+Usuario <|-- Secretaria
+Usuario <|-- Directivo
+
+@enduml
