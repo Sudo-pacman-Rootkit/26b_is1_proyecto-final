@@ -1,0 +1,70 @@
+@startuml e6_er_calificaciones_catalogo
+!pragma layout smetana
+title Equipo 6 — Modelo entidad-relación
+hide circle
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam ArrowColor #444444
+skinparam entity {
+  BackgroundColor #EAF2FB
+  BorderColor #2F5D8A
+}
+entity "alumno\n(módulo Alumnos)" as alumno #F2F4F4 {
+  * id_alumno : INT <<PK>>
+}
+entity "grupo\n(módulo Aulas/Grupos)" as grupo #F2F4F4 {
+  * id_grupo : INT <<PK>>
+}
+entity "tipo_examen" as tipo_examen {
+  * id_tipo_examen : INT <<PK>>
+  --
+  * clave : VARCHAR(10)
+  * nombre : VARCHAR(60)
+  * asistencia_minima : DECIMAL(5,2)
+  * calificacion_aprobatoria : DECIMAL(4,2)
+  * oportunidades : SMALLINT
+  * estado : VARCHAR(10)
+}
+entity "acta" as acta {
+  * id_acta : INT <<PK>>
+  --
+  * folio : VARCHAR(20)
+  * id_grupo : INT <<FK>>
+  * id_tipo_examen : INT <<FK>>
+  * estado : VARCHAR(15)
+  fecha_cierre : DATE
+}
+entity "calificacion" as calificacion {
+  * id_calificacion : INT <<PK>>
+  --
+  * id_acta : INT <<FK>>
+  * id_alumno : INT <<FK>>
+  valor : DECIMAL(4,2)
+  * es_np : BOOLEAN
+  * estado : VARCHAR(15)
+}
+entity "asistencia" as asistencia {
+  * id_asistencia : INT <<PK>>
+  --
+  * id_grupo : INT <<FK>>
+  * id_alumno : INT <<FK>>
+  * fecha : DATE
+  * asistio : BOOLEAN
+}
+entity "solicitud_revision" as solicitud_revision {
+  * id_solicitud : INT <<PK>>
+  --
+  * id_calificacion : INT <<FK>>
+  * motivo : VARCHAR(500)
+  * estado : VARCHAR(15)
+  * fecha : DATE
+}
+grupo ||--o{ acta
+tipo_examen ||--o{ acta
+acta ||--|{ calificacion
+alumno ||--o{ calificacion
+grupo ||--o{ asistencia
+alumno ||--o{ asistencia
+calificacion ||--o{ solicitud_revision
+@enduml
