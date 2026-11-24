@@ -1,0 +1,44 @@
+@startuml
+!pragma layout smetana
+title Estados del Tipo de examen
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam roundCorner 12
+skinparam ArrowColor #444444
+skinparam actorBorderColor #1F3B57
+skinparam actorBackgroundColor #FFFFFF
+skinparam participantBackgroundColor #EAF2FB
+skinparam participantBorderColor #2F5D8A
+skinparam boundaryBackgroundColor #EAF2FB
+skinparam boundaryBorderColor #2F5D8A
+skinparam controlBackgroundColor #EAF2FB
+skinparam controlBorderColor #2F5D8A
+skinparam databaseBackgroundColor #F9E79F
+skinparam databaseBorderColor #8A6D1F
+skinparam componentBackgroundColor #EAF2FB
+skinparam componentBorderColor #2F5D8A
+skinparam interfaceBackgroundColor #FFFFFF
+skinparam interfaceBorderColor #1F3B57
+skinparam packageBorderColor #1F3B57
+skinparam activityBackgroundColor #EAF2FB
+skinparam activityBorderColor #2F5D8A
+skinparam activityDiamondBackgroundColor #FFF0CC
+skinparam activityDiamondBorderColor #B7791F
+skinparam swimlaneTitleFontStyle bold
+skinparam sequenceGroupBackgroundColor #FFF0CC
+skinparam sequenceGroupBorderColor #B7791F
+skinparam stateBackgroundColor #EAF2FB
+skinparam stateBorderColor #2F5D8A
+skinparam classAttributeIconSize 0
+skinparam classBackgroundColor #EAF2FB
+skinparam classBorderColor #2F5D8A
+skinparam noteBackgroundColor #FFF7E6
+skinparam noteBorderColor #B7791F
+state "Activo" as Activo
+state "Inactivo" as Inactivo
+[*] --> Activo : se registra
+Activo --> Inactivo : se desactiva\n[sin exámenes programados]
+Inactivo --> Activo : se vuelve a activar
+note bottom of Inactivo : No se borra, solo deja de usarse.
+@enduml
