@@ -206,14 +206,17 @@ Representa el flujo de acciones y decisiones de cada funcionalidad. Se muestra u
 # Diagrama de secuencia
 
 Representa el orden de interacción entre los actores y componentes del sistema. Se muestra un diagrama por cada caso de uso.
+TODO-Falta informacion para complementar el resto de la informacion.
 
 # Diagrama de estados
 
 Representa los cambios de estado de los objetos principales del módulo. Se muestran los diagramas correspondientes a los objetos que poseen un ciclo de vida relevante.
+TODO-Falta informacion para complementar el resto de la informacion.
 
 # Diagrama de clases
 
 Representa las clases principales del módulo, sus atributos y las relaciones entre ellas.
+TODO-Falta informacion para complementar el resto de la informacion.
 
 # Glosario y Abreviaturas
 
