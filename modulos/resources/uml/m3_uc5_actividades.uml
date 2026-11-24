@@ -1,0 +1,49 @@
+@startuml
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam ArrowColor #42556A
+skinparam BorderColor #42556A
+skinparam dpi 150
+skinparam roundcorner 8
+skinparam activity {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+  DiamondBackgroundColor #FFFFFF
+  DiamondBorderColor #42556A
+}
+
+title UC5. Consultar perfil propio: actividades
+|Profesor|
+start
+:Solicitar consulta de su perfil;
+|Módulo Profesores|
+:Comprobar identidad y permiso de operación;
+if (¿Acceso autorizado?) then (sí)
+else (no)
+  :Informar rechazo de acceso;
+  stop
+endif
+
+:Resolver el vínculo docente desde la sesión;
+if (¿Existe vínculo con perfil docente?) then (sí)
+else (no)
+  :Informar falta de vínculo con el perfil;
+  stop
+endif
+
+:Consultar exclusivamente el registro vinculado;
+if (¿Lectura correcta?) then (sí)
+else (no)
+  :Informar fallo de consulta;
+  stop
+endif
+
+if (¿Se encontró el registro?) then (sí)
+  :Mostrar el perfil propio;
+else (no)
+  :Informar inconsistencia del vínculo;
+endif
+stop
+@enduml

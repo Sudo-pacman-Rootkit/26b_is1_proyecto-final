@@ -1,0 +1,89 @@
+@startuml
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam ArrowColor #42556A
+skinparam BorderColor #42556A
+skinparam dpi 150
+skinparam roundcorner 8
+skinparam sequence {
+  ParticipantBackgroundColor #F1F4F7
+  ParticipantBorderColor #42556A
+  LifeLineBorderColor #7B8794
+  ActorBorderColor #42556A
+  GroupBackgroundColor #FAFBFC
+  GroupHeaderFontColor #253746
+}
+
+title UC6. Actualizar datos personales: secuencia
+hide footbox
+skinparam sequenceMessageAlign center
+
+actor "Profesor" as Actor
+boundary "Vista de\nProfesores" as Vista
+control "Control de\nProfesores" as Control
+participant "Acceso\ncompartido" as Acceso
+database "Registro de\nprofesores" as Registro
+
+Actor -> Vista : Enviar cambios de sus datos personales
+Vista -> Control : actualizarMiPerfil(cambios)
+Control -> Acceso : comprobarAcceso(operación, sesión)
+Acceso --> Control : permiso y vínculo docente, si existe
+alt acceso no autorizado
+  Control --> Vista : acceso rechazado
+  Vista --> Actor : informar rechazo
+else acceso autorizado
+  alt cuenta sin vínculo con perfil docente
+    Control --> Vista : perfil no vinculado
+    Vista --> Actor : informar falta de vínculo
+  else vínculo docente disponible
+    Control -> Registro : obtenerProfesor(profesorDeSesion)
+    alt registro no encontrado
+      Registro --> Control : no existe el profesor vinculado
+      Control --> Vista : perfil no disponible
+      Vista --> Actor : informar inconsistencia de vínculo
+    else fallo de lectura
+      Registro --> Control : error de consulta
+      Control --> Vista : consulta no disponible
+      Vista --> Actor : informar fallo de consulta
+    else registro encontrado
+      Registro --> Control : datos actuales del perfil
+      Control -> Control : validarDatosYCambiosPermitidos(cambios)
+      alt datos inválidos o campos no autorizados
+        Control --> Vista : cambios rechazados
+        Vista --> Actor : informar motivo sin guardar
+      else datos válidos y campos autorizados
+        Control -> Registro : buscarDuplicadoExcluyendo(profesorDeSesion)
+        Registro --> Control : resultado o error
+        alt fallo al consultar duplicados
+          Control --> Vista : consulta de duplicados no disponible
+          Vista --> Actor : informar fallo sin guardar
+        else consulta de duplicados correcta
+          alt existe duplicado
+            Control --> Vista : cambios rechazados
+            Vista --> Actor : informar duplicado sin guardar
+          else no existe duplicado
+            Control -> Registro : actualizarDatos(profesorDeSesion, cambios)
+            alt guardado confirmado
+              Registro --> Control : actualización confirmada
+              Control --> Vista : perfil actualizado
+              Vista --> Actor : mostrar confirmación
+            else fallo de guardado
+              Registro --> Control : operación no confirmada
+              Control --> Vista : error de actualización
+              Vista --> Actor : informar fallo sin confirmar cambios
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+note over Acceso, Control
+  El vínculo cuenta-perfil y los campos de autoedición
+  se validan con E1 y E3. No se permite enviar el
+  identificador de otro profesor.
+end note
+@enduml

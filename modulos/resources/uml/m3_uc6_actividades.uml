@@ -1,0 +1,76 @@
+@startuml
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam ArrowColor #42556A
+skinparam BorderColor #42556A
+skinparam dpi 150
+skinparam roundcorner 8
+skinparam activity {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+  DiamondBackgroundColor #FFFFFF
+  DiamondBorderColor #42556A
+}
+
+title UC6. Actualizar datos personales: actividades
+|Profesor|
+start
+:Enviar cambios de sus datos personales;
+|Módulo Profesores|
+:Comprobar identidad y permiso de operación;
+if (¿Acceso autorizado?) then (sí)
+else (no)
+  :Informar rechazo de acceso;
+  stop
+endif
+
+:Resolver el vínculo docente desde la sesión;
+if (¿Existe vínculo con perfil docente?) then (sí)
+else (no)
+  :Informar falta de vínculo con el perfil;
+  stop
+endif
+
+:Consultar el registro docente vinculado;
+if (¿Lectura correcta?) then (sí)
+else (no)
+  :Informar fallo de consulta;
+  stop
+endif
+
+if (¿Se encontró el registro?) then (sí)
+else (no)
+  :Informar inconsistencia del vínculo;
+  stop
+endif
+
+:Validar datos y campos permitidos para autoedición;
+if (¿Cambios válidos y permitidos?) then (sí)
+else (no)
+  :Informar rechazo sin guardar;
+  stop
+endif
+
+:Consultar duplicados según las reglas acordadas;
+if (¿Consulta de duplicados correcta?) then (sí)
+else (no)
+  :Informar fallo en la consulta sin guardar;
+  stop
+endif
+
+if (¿Existe otra coincidencia?) then (sí)
+  :Informar duplicado sin guardar;
+  stop
+else (no)
+endif
+
+:Guardar únicamente los cambios propios autorizados;
+if (¿Guardado confirmado?) then (sí)
+  :Mostrar confirmación de actualización;
+else (no)
+  :Informar fallo sin confirmar los cambios;
+endif
+stop
+@enduml
