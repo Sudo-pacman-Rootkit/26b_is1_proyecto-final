@@ -1,0 +1,119 @@
+@startuml
+
+title Diagrama de estados 1 (Módulo 4) - Administración y ciclo de vida de las asignaturas
+
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam backgroundColor white
+skinparam linetype polyline
+skinparam nodesep 75
+skinparam ranksep 60
+skinparam dpi 150
+
+skinparam state {
+    BackgroundColor #F8F9F9
+    BorderColor #7F8C8D
+    ArrowColor #566573
+    FontColor #1C2833
+    FontSize 12
+    AttributeFontSize 11
+}
+
+hide empty description
+
+' --- Inicio del flujo ---
+[*] --> NoRegistrada
+
+state "No Registrada" as NoRegistrada
+NoRegistrada : • Asignatura inexistente
+NoRegistrada : • Sin registro en el catálogo
+
+NoRegistrada -down-> Registro : Registrar asignatura\n[Solicitud del coordinador]
+
+' --- Estado Compuesto: Registro (2 columnas limpias) ---
+state "Registro y Configuración" as Registro {
+
+    [*] --> CapturaDatos
+
+    state "1. Captura de Datos" as CapturaDatos
+    CapturaDatos : • Capturar información general
+    CapturaDatos : • Definir nombre de asignatura
+    CapturaDatos : • Definir datos de identificación
+
+    CapturaDatos -down-> ConfiguracionAcademica : Información\nregistrada
+
+    state "2. Configuración Académica" as ConfiguracionAcademica
+    ConfiguracionAcademica : • Definir créditos y carácter
+    ConfiguracionAcademica : • Definir núcleo y periodo académico
+
+    ConfiguracionAcademica -down-> ConfiguracionSeriacion : Datos académicos\ndefinidos
+
+    state "3. Seriación" as ConfiguracionSeriacion
+    ConfiguracionSeriacion : • Definir relaciones de seriación
+    ConfiguracionSeriacion : • Establecer secuencia académica
+
+    ConfiguracionSeriacion -right-> OrganizacionCurricular : Seriación\nconfigurada
+
+    state "4. Organización Curricular" as OrganizacionCurricular
+    OrganizacionCurricular : • Incorporar al plan de estudios
+    OrganizacionCurricular : • Organizar en mapa curricular
+
+    OrganizacionCurricular -up-> RegistroTemario : Organización\ndefinida
+
+    state "5. Registro de Temario" as RegistroTemario
+    RegistroTemario : • Registrar archivo del temario
+    RegistroTemario : • Registrar enlace institucional
+
+    RegistroTemario -up-> VerificacionRegistro : Temario\nregistrado
+
+    state "6. Verificación de Registro" as VerificacionRegistro
+    VerificacionRegistro : • Verificar información capturada
+    VerificacionRegistro : • Verificar datos académicos y mapa
+
+    VerificacionRegistro -right-> [*] : Registro\ncompletado
+}
+
+Registro -down-> Activa : Asignatura registrada
+
+' --- Estados Operativos ---
+state "Activa" as Activa {
+
+    [*] --> Disponible
+
+    state "Disponible" as Disponible
+    Disponible : • Asignatura habilitada en el catálogo
+    Disponible : • Información académica disponible
+
+    Disponible -down-> Modificacion : Solicitar\nmodificación
+    Modificacion -up-> Disponible : Guardar\nmodificaciones
+
+    state "En Modificación" as Modificacion
+    Modificacion : • Actualizar información general
+    Modificacion : • Actualizar créditos, carácter y núcleo
+    Modificacion : • Modificar seriación y mapa curricular
+    Modificacion : • Actualizar temario
+
+    Disponible -right-> ConsultaInterna : Consultar\ninformación
+    ConsultaInterna -left-> Disponible : Finalizar\nconsulta
+
+    state "En Consulta" as ConsultaInterna
+    ConsultaInterna : • Consultar información académica
+    ConsultaInterna : • Consultar temario y seriación
+}
+
+Activa -right-> Inactiva : Desactivar\nasignatura
+Inactiva -left-> Activa : Reactivar\nasignatura
+
+state "Inactiva" as Inactiva {
+
+    [*] --> ConservacionHistorica
+
+    state "Conservación Histórica" as ConservacionHistorica
+    ConservacionHistorica : • Asignatura deshabilitada en catálogo
+    ConservacionHistorica : • Conservar información histórica
+    ConservacionHistorica : • Mantener datos académicos y plan
+
+    ConservacionHistorica --> ConservacionHistorica : Consultar\nhistorial
+}
+
+@enduml
