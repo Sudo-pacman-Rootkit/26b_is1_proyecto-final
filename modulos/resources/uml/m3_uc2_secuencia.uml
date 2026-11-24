@@ -1,0 +1,32 @@
+@startuml
+title Diagrama de secuencia - Consultar profesores
+actor "Administrador escolar" as Admin
+participant "Interfaz web" as UI
+participant "ProfesorController" as Ctrl
+participant "ProfesorService" as Svc
+database "Base de datos" as DB
+
+Admin -> UI : Selecciona "Consultar profesores"
+UI -> Ctrl : listarProfesores()
+Ctrl -> Svc : obtenerProfesores(filtros)
+Svc -> DB : SELECT profesores
+DB --> Svc : Lista de profesores
+Svc --> Ctrl : Lista de profesores
+Ctrl --> UI : Datos
+UI --> Admin : Muestra tabla de profesores
+
+opt Aplicar búsqueda o filtros
+    Admin -> UI : Ingresa nombre / filtro
+    UI -> Ctrl : buscarProfesores(criterio)
+    Ctrl -> Svc : obtenerProfesores(criterio)
+    Svc -> DB : SELECT con filtro
+    DB --> Svc : Resultados
+    Svc --> Ctrl : Resultados
+    Ctrl --> UI : Datos filtrados
+    alt Hay resultados
+        UI --> Admin : Muestra profesores encontrados
+    else Sin resultados
+        UI --> Admin : "No se encontraron profesores"
+    end
+end
+@enduml

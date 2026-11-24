@@ -1,0 +1,34 @@
+@startuml
+title Diagrama de secuencia - Registrar profesor
+actor "Administrador escolar" as Admin
+participant "Interfaz web" as UI
+participant "ProfesorController" as Ctrl
+participant "ProfesorService" as Svc
+database "Base de datos" as DB
+
+Admin -> UI : Selecciona "Registrar profesor"
+UI --> Admin : Muestra formulario de registro
+Admin -> UI : Captura datos y presiona "Guardar"
+UI -> Ctrl : registrarProfesor(datos)
+Ctrl -> Svc : validarDatos(datos)
+
+alt Datos inválidos o incompletos
+    Svc --> Ctrl : Error de validación
+    Ctrl --> UI : Mensaje de error
+    UI --> Admin : Muestra campos a corregir
+else Datos válidos
+    Svc -> DB : buscarProfesor(correo / número de empleado)
+    DB --> Svc : Resultado
+    alt Profesor ya existe
+        Svc --> Ctrl : Error: profesor duplicado
+        Ctrl --> UI : Mensaje de duplicado
+        UI --> Admin : Informa que ya está registrado
+    else Profesor nuevo
+        Svc -> DB : guardarProfesor(datos)
+        DB --> Svc : Registro creado (id)
+        Svc --> Ctrl : Registro exitoso
+        Ctrl --> UI : Confirmación
+        UI --> Admin : "Profesor registrado correctamente"
+    end
+end
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+title Diagrama de actividades - Registrar profesor
+|Administrador escolar|
+start
+:Selecciona "Registrar profesor";
+:Captura los datos del profesor;
+:Presiona "Guardar";
+|Sistema|
+:Valida los datos capturados;
+if (¿Datos válidos?) then (no)
+  :Muestra errores de validación;
+  |Administrador escolar|
+  :Corrige los datos;
+  |Sistema|
+  stop
+else (sí)
+  :Verifica que el profesor no exista;
+  if (¿Ya existe?) then (sí)
+    :Muestra mensaje de profesor duplicado;
+    stop
+  else (no)
+    :Guarda el profesor en la base de datos;
+    :Muestra confirmación de registro;
+  endif
+endif
+|Administrador escolar|
+:Visualiza la confirmación;
+stop
+@enduml

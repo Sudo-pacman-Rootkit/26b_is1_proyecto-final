@@ -1,0 +1,24 @@
+@startuml
+title Diagrama de actividades - Consultar profesores
+|Administrador escolar|
+start
+:Selecciona "Consultar profesores";
+|Sistema|
+:Obtiene la lista de profesores;
+:Muestra la lista;
+|Administrador escolar|
+if (¿Desea buscar o filtrar?) then (sí)
+  :Ingresa criterio de búsqueda;
+  |Sistema|
+  :Consulta con el criterio;
+  if (¿Hay resultados?) then (sí)
+    :Muestra profesores encontrados;
+  else (no)
+    :Muestra "Sin resultados";
+  endif
+else (no)
+endif
+|Administrador escolar|
+:Revisa la información;
+stop
+@enduml

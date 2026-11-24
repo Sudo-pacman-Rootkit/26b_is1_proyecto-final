@@ -1,0 +1,22 @@
+@startuml
+title Diagrama de estados - Registro de profesor
+
+state Borrador : Al entrar / Mostrar formulario vacío
+state Borrador : Durante / Capturar datos del profesor
+
+state EnValidacion : Al entrar / Recibir datos capturados
+state EnValidacion : Durante / Validar campos y verificar duplicado
+
+state Registrado : Al entrar / Guardar profesor en la BD
+state Registrado : Durante / Mostrar confirmación
+
+state Cancelado : Al entrar / Descartar datos capturados
+
+[*] --> Borrador : Inicia el registro
+Borrador --> EnValidacion : Guardar
+EnValidacion --> Borrador : Datos inválidos / duplicado
+EnValidacion --> Registrado : Datos válidos
+Borrador --> Cancelado : Cancelar
+Registrado --> [*]
+Cancelado --> [*]
+@enduml
