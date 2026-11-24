@@ -1,0 +1,72 @@
+@startuml
+title M4 - UC03 - Consultar asignaturas sugeridas
+
+skinparam shadowing false
+skinparam roundcorner 12
+
+start
+
+:Alumno selecciona
+"Asignaturas sugeridas";
+
+:Identificar el plan de estudios
+asociado al alumno;
+
+if (¿Existe un plan de estudios asociado?) then (Sí)
+
+  :Consultar asignaturas
+  del plan de estudios;
+
+  :Consultar asignaturas
+  acreditadas por el alumno;
+
+  :Consultar asignaturas
+  inscritas actualmente;
+
+  :Identificar asignaturas
+  pendientes;
+
+  :Consultar las relaciones
+  de seriación;
+
+  :Evaluar las asignaturas pendientes;
+
+  if (¿Cumplen la seriación requerida?) then (Sí)
+
+    :Excluir asignaturas ya
+    acreditadas o inscritas;
+
+    :Generar lista de
+    asignaturas sugeridas;
+
+    if (¿Existen sugerencias?) then (Sí)
+
+      :Mostrar asignaturas
+      sugeridas al alumno;
+
+    else (No)
+
+      :Mostrar mensaje
+      "No hay asignaturas sugeridas disponibles";
+
+    endif
+
+  else (No)
+
+    :Descartar asignaturas
+    cuyos antecedentes no se cumplen;
+
+    :Mostrar las sugerencias
+    que sí cumplen las condiciones;
+
+  endif
+
+else (No)
+
+  :Mostrar mensaje
+  "No se encontró un plan de estudios asociado";
+
+endif
+
+stop
+@enduml

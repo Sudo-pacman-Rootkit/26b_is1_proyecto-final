@@ -1,0 +1,52 @@
+@startuml
+title M4 - UC02 - Consultar avance curricular
+
+skinparam shadowing false
+skinparam roundcorner 12
+
+start
+
+:Alumno selecciona
+"Avance curricular";
+
+:Identificar el plan de estudios
+asociado al alumno;
+
+if (¿Existe un plan de estudios asociado?) then (Sí)
+
+  :Consultar todas las asignaturas
+  que integran el plan;
+
+  :Consultar resultados oficiales
+  del alumno en Calificaciones;
+
+  :Consultar asignaturas inscritas
+  actualmente en Inscripciones;
+
+  :Comparar la trayectoria del alumno
+  con las asignaturas del plan;
+
+  :Clasificar asignaturas como
+  acreditadas, inscritas o pendientes;
+
+  :Sumar créditos
+  de asignaturas acreditadas;
+
+  :Obtener total de créditos
+  requerido por el plan;
+
+  :Calcular porcentaje
+  de avance curricular;
+
+  :Mostrar avance, créditos
+  y estado de las asignaturas;
+
+else (No)
+
+  :Mostrar mensaje
+  "No se encontró un plan de estudios asociado";
+
+endif
+
+stop
+@enduml
