@@ -1,0 +1,18 @@
+@startuml
+title M4 - Consultar avance curricular
+actor Alumno
+boundary "Interfaz de trayectoria" as UI
+control "Controlador curricular" as C
+entity "Servicio curricular" as S
+database "Base de datos" as BD
+
+Alumno -> UI: Abrir avance curricular
+UI -> C: Solicitar avance del alumno
+C -> S: Calcular avance(idAlumno)
+S -> BD: Consultar asignaturas del plan y aprobadas
+BD --> S: Datos académicos
+S -> S: Calcular créditos y asignaturas completadas
+S --> C: Avance curricular
+C --> UI: Mostrar avance
+UI --> Alumno: Visualizar porcentaje y materias
+@enduml

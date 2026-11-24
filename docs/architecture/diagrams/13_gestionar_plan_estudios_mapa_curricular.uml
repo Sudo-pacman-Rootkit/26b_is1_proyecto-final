@@ -1,0 +1,30 @@
+@startuml
+title M4 - Gestionar plan de estudios y mapa curricular
+actor "Coordinador de la carrera" as Coord
+boundary "Interfaz de planes de estudio" as UI
+control "Controlador curricular" as C
+entity "Gestor de planes de estudio" as S
+database "Base de datos" as BD
+
+Coord -> UI: Abrir gestión del plan de estudios
+UI -> C: Solicitar plan y mapa curricular
+C -> S: Obtener estructura del plan
+S -> BD: Consultar plan, periodos y asignaturas
+BD --> S: Estructura actual
+S --> C: Datos del plan y mapa
+C --> UI: Mostrar estructura
+Coord -> UI: Agregar, quitar o reorganizar asignaturas
+UI -> C: Enviar cambios de estructura
+C -> S: Validar y actualizar mapa curricular
+S -> S: Verificar periodos y relaciones
+alt Estructura válida
+  S -> BD: Guardar cambios del plan y mapa
+  BD --> S: Confirmación
+  S --> C: Actualización exitosa
+  C --> UI: Mostrar mapa actualizado
+else Estructura inválida
+  S --> C: Reportar inconsistencias
+  C --> UI: Mostrar errores
+end
+UI --> Coord: Informar resultado
+@enduml

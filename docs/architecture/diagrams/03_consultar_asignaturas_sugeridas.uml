@@ -1,0 +1,18 @@
+@startuml
+title M4 - Consultar asignaturas sugeridas para el siguiente periodo
+actor Alumno
+boundary "Interfaz de trayectoria" as UI
+control "Controlador curricular" as C
+entity "Servicio de sugerencias" as S
+database "Base de datos" as BD
+
+Alumno -> UI: Solicitar asignaturas sugeridas
+UI -> C: Consultar sugerencias(idAlumno)
+C -> S: Generar sugerencias
+S -> BD: Consultar avance, seriación y plan vigente
+BD --> S: Historial y requisitos académicos
+S -> S: Identificar materias disponibles y seriación cumplida
+S --> C: Lista de asignaturas sugeridas
+C --> UI: Mostrar sugerencias
+UI --> Alumno: Visualizar materias del siguiente periodo
+@enduml

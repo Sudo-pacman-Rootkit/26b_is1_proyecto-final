@@ -1,0 +1,17 @@
+@startuml
+title M4 - Buscar y filtrar asignaturas
+actor Alumno
+boundary "Interfaz de consulta" as UI
+control "Controlador de asignaturas" as C
+entity "Catálogo de asignaturas" as S
+database "Base de datos" as BD
+
+Alumno -> UI: Ingresar texto o filtros\n(nombre, periodo, núcleo, carácter)
+UI -> C: Enviar criterios de búsqueda
+C -> S: BuscarAsignaturas(criterios)
+S -> BD: Consultar asignaturas que coincidan
+BD --> S: Resultados
+S --> C: Lista filtrada
+C --> UI: Mostrar resultados
+UI --> Alumno: Visualizar asignaturas
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+title M4 - Modificar asignatura
+actor "Coordinador de la carrera" as Coord
+boundary "Interfaz de gestión académica" as UI
+control "Controlador de asignaturas" as C
+entity "Gestor de asignaturas" as S
+database "Base de datos" as BD
+
+Coord -> UI: Seleccionar asignatura a modificar
+UI -> C: Solicitar datos actuales
+C -> S: Obtener asignatura(idAsignatura)
+S -> BD: Consultar registro
+BD --> S: Datos actuales
+S --> C: Datos de asignatura
+C --> UI: Mostrar formulario
+Coord -> UI: Editar información y guardar
+UI -> C: Enviar cambios
+C -> S: Validar y modificar asignatura
+S -> BD: Actualizar registro
+BD --> S: Confirmación
+S --> C: Modificación exitosa
+C --> UI: Mostrar confirmación
+UI --> Coord: Ver resultado
+@enduml

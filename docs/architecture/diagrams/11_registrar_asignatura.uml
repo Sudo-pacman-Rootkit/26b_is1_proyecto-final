@@ -1,0 +1,24 @@
+@startuml
+title M4 - Registrar asignatura
+actor "Coordinador de la carrera" as Coord
+boundary "Interfaz de gestión académica" as UI
+control "Controlador de asignaturas" as C
+entity "Gestor de asignaturas" as S
+database "Base de datos" as BD
+
+Coord -> UI: Capturar datos de nueva asignatura
+UI -> C: Enviar información
+C -> S: Validar y registrar asignatura
+S -> BD: Verificar que no exista duplicado
+BD --> S: Resultado de búsqueda
+alt No existe y los datos son válidos
+  S -> BD: Insertar asignatura
+  BD --> S: ID y confirmación
+  S --> C: Registro exitoso
+  C --> UI: Mostrar confirmación
+else Existe o hay datos inválidos
+  S --> C: Informar duplicidad o errores
+  C --> UI: Mostrar mensaje correspondiente
+end
+UI --> Coord: Informar resultado
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+title M4 - Consultar información de asignatura
+actor Alumno
+actor Docente
+boundary "Interfaz de asignaturas" as UI
+control "Controlador de asignaturas" as C
+entity "Catálogo académico" as S
+database "Base de datos" as BD
+
+Alumno -> UI: Seleccionar asignatura
+Docente -> UI: Seleccionar asignatura
+UI -> C: Solicitar información(idAsignatura)
+C -> S: Obtener datos de asignatura
+S -> BD: Consultar información académica
+BD --> S: Nombre, créditos, periodo,\nnúcleo, carácter y estado
+S --> C: Información de asignatura
+C --> UI: Mostrar información
+UI --> Alumno: Visualizar información
+UI --> Docente: Visualizar información
+@enduml
