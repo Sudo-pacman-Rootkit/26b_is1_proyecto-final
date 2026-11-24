@@ -1,0 +1,25 @@
+@startuml
+title UC7 - Consultar historial académico (Kárdex) - Secuencia
+autonumber
+actor "Alumno" as A
+boundary "Interfaz Web" as UI
+control "Controlador de Alumnos" as Ctrl
+participant "Módulo Calificaciones" as Cal
+participant "Módulo Asignaturas" as Asig
+
+A -> UI : Seleccionar "Historial Académico (Kárdex)"
+UI -> Ctrl : obtenerKardex(matricula)
+Ctrl -> Cal : Consultar calificaciones oficializadas del alumno
+Cal --> Ctrl : Lista de calificaciones por periodo
+Ctrl -> Asig : Consultar créditos totales del plan de estudios
+Asig --> Ctrl : Créditos requeridos del plan
+
+alt Existen registros académicos
+    Ctrl -> Ctrl : Calcular promedio general y porcentaje de avance
+    Ctrl --> UI : Enviar Kárdex consolidado
+    UI --> A : Mostrar historial por periodo, promedio y créditos
+else Sin historial registrado
+    Ctrl --> UI : Kárdex sin materias cursadas
+    UI --> A : Mostrar mensaje "Aún no cuentas con historial oficial"
+end
+@enduml

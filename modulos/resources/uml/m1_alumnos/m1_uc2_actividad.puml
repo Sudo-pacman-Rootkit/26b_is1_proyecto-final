@@ -1,0 +1,19 @@
+@startuml
+title Actividad - UC2: Consultar alumnos
+|Control Escolar|
+start
+:Ingresar matrícula, nombre o filtro de carrera;
+
+|Sistema|
+:Buscar expedientes en la base de datos;
+if (¿Existen coincidencias?) then (Sí)
+    :Preparar listado y datos del expediente;
+    |Control Escolar|
+    :Visualizar información del alumno;
+    stop
+else (No)
+    |Control Escolar|
+    :Mostrar aviso "Sin resultados encontrados";
+    stop
+endif
+@enduml

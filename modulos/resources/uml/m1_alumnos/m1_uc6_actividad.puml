@@ -1,0 +1,20 @@
+@startuml
+title Actividad - UC6: Editar datos de contacto y domicilio
+|Alumno|
+start
+:Abrir edición de perfil;
+:Modificar teléfono, correo alterno o domicilio;
+
+|Sistema|
+:Validar formato de teléfono y correo electrónico;
+if (¿Formato correcto?) then (Sí)
+    :Guardar cambios en la base de datos;
+    |Alumno|
+    :Mostrar confirmación de datos actualizados;
+    stop
+else (No)
+    |Alumno|
+    :Mostrar mensaje de error en los campos inválidos;
+    stop
+endif
+@enduml

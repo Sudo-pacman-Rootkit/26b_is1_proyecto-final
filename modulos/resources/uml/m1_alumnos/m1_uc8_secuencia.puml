@@ -1,0 +1,30 @@
+@startuml
+title UC8 - Descargar constancia de estudios (PDF) - Secuencia
+autonumber
+actor "Alumno" as A
+boundary "Interfaz Web" as UI
+control "Controlador de Documentos" as Ctrl
+participant "Módulo Periodo" as Per
+participant "Módulo Inscripciones" as Insc
+database "Base de Datos" as BD
+
+A -> UI : Presionar "Descargar constancia de estudios"
+UI -> Ctrl : generarConstancia(matricula)
+Ctrl -> BD : Verificar estatus académico del alumno
+BD --> Ctrl : Estatus del alumno
+Ctrl -> Per : Obtener periodo escolar activo
+Per --> Ctrl : Periodo vigente
+Ctrl -> Insc : Verificar inscripción vigente del alumno
+Insc --> Ctrl : Confirmación de inscripción
+
+alt Alumno "Activo" e inscrito en periodo vigente
+    Ctrl -> Ctrl : Generar folio único y documento PDF (< 3 seg)
+    Ctrl -> BD : Registrar folio de constancia emitida
+    BD --> Ctrl : Folio guardado
+    Ctrl --> UI : Enviar archivo PDF
+    UI --> A : Descargar constancia de estudios
+else Alumno inactivo o sin inscripción vigente
+    Ctrl --> UI : Error "No cumple requisitos para emitir constancia"
+    UI --> A : Mostrar motivo de restricción
+end
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+title UC4 - Cambiar estatus / Dar de baja alumno - Secuencia
+autonumber
+actor "Control Escolar" as Admin
+boundary "Interfaz Web" as UI
+control "Controlador de Alumnos" as Ctrl
+database "Base de Datos" as BD
+
+Admin -> UI : Seleccionar alumno, nuevo estatus y motivo
+UI -> Ctrl : cambiarEstatus(matricula, nuevoEstatus, motivo)
+Ctrl -> BD : Consultar estatus actual del alumno
+BD --> Ctrl : Estatus actual
+
+alt Transición de estatus válida
+    Ctrl -> BD : Actualizar estatus y guardar registro en bitácora
+    BD --> Ctrl : Cambio guardado
+    Ctrl --> UI : Confirmación de cambio de estatus
+    UI --> Admin : Mostrar nuevo estatus del alumno
+else Transición no permitida (ej. alumno ya egresado)
+    Ctrl --> UI : Error "No es posible modificar este estatus"
+    UI --> Admin : Mostrar aviso de restricción
+end
+@enduml

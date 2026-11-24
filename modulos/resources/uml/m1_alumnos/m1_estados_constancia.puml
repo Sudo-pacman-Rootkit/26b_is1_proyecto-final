@@ -1,0 +1,15 @@
+@startuml
+title Estados de la Solicitud de Constancia de Estudios
+
+[*] --> Solicitada : Alumno solicita constancia (UC8)
+
+Solicitada --> Validando : Sistema verifica estatus\ny periodo vigente
+
+Validando --> Rechazada : Alumno inactivo o\nsin inscripción vigente
+Validando --> Generada : Alumno activo e inscrito\n[asigna folio único]
+
+Generada --> Descargada : Sistema entrega archivo PDF\nal navegador del alumno
+
+Rechazada --> [*]
+Descargada --> [*]
+@enduml

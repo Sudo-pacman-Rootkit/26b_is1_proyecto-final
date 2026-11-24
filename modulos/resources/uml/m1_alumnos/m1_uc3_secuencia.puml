@@ -1,0 +1,23 @@
+@startuml
+title UC3 - Modificar datos académicos - Secuencia
+autonumber
+actor "Control Escolar" as Admin
+boundary "Interfaz Web" as UI
+control "Controlador de Alumnos" as Ctrl
+database "Base de Datos" as BD
+
+Admin -> UI : Seleccionar alumno y editar datos académicos
+UI -> Ctrl : actualizarDatosAcademicos(matricula, nuevosDatos)
+Ctrl -> BD : Verificar existencia del alumno
+BD --> Ctrl : Datos actuales del alumno
+
+alt Alumno existe y datos válidos
+    Ctrl -> BD : Actualizar carrera, plan de estudios o semestre
+    BD --> Ctrl : Actualización confirmada
+    Ctrl --> UI : Operación exitosa
+    UI --> Admin : Mostrar confirmación de cambios
+else Datos inválidos
+    Ctrl --> UI : Error de validación
+    UI --> Admin : Solicitar corrección de campos
+end
+@enduml

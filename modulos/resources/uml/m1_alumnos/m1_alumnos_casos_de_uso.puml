@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Control Escolar /\nAdministrador" as Admin
+actor "Alumno" as A
+
+rectangle "Módulo de Alumnos" {
+    usecase "UC1: Registrar alumno y\ngenerar matrícula" as UC1
+    usecase "UC2: Consultar alumnos" as UC2
+    usecase "UC3: Modificar datos\nacadémicos del alumno" as UC3
+    usecase "UC4: Cambiar estatus /\nDar de baja alumno" as UC4
+
+    usecase "UC5: Consultar datos\npersonales y académicos" as UC5
+    usecase "UC6: Editar datos de\ncontacto y domicilio" as UC6
+    usecase "UC7: Consultar historial\nacadémico (Kárdex)" as UC7
+    usecase "UC8: Descargar constancia\nde estudios (PDF)" as UC8
+}
+
+Admin --> UC1
+Admin --> UC2
+Admin --> UC3
+Admin --> UC4
+
+A --> UC5
+A --> UC6
+A --> UC7
+A --> UC8
+@enduml

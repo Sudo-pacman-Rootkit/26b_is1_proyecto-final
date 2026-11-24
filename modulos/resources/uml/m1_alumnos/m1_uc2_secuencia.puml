@@ -1,0 +1,21 @@
+@startuml
+title UC2 - Consultar alumnos - Secuencia
+autonumber
+actor "Control Escolar" as Admin
+boundary "Interfaz Web" as UI
+control "Controlador de Alumnos" as Ctrl
+database "Base de Datos" as BD
+
+Admin -> UI : Ingresar criterio de búsqueda (matrícula o nombre)
+UI -> Ctrl : buscarAlumnos(criterio)
+Ctrl -> BD : Consultar expedientes que coincidan
+BD --> Ctrl : Lista de alumnos encontrados
+
+alt Existen coincidencias
+    Ctrl --> UI : Enviar lista de alumnos
+    UI --> Admin : Mostrar tabla de resultados y detalle
+else Sin resultados
+    Ctrl --> UI : Lista vacía
+    UI --> Admin : Mostrar mensaje "No se encontraron alumnos"
+end
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+title Actividad - UC4: Cambiar estatus / Dar de baja alumno
+|Control Escolar|
+start
+:Seleccionar alumno;
+:Elegir nuevo estatus (Baja temporal, Baja definitiva, Activo o Egresado);
+:Ingresar motivo del cambio;
+
+|Sistema|
+:Verificar si el cambio de estatus es válido;
+if (¿Transición permitida?) then (Sí)
+    :Actualizar estatus sin eliminar historial;
+    :Registrar movimiento en bitácora;
+    |Control Escolar|
+    :Confirmar cambio de estatus;
+    stop
+else (No)
+    |Control Escolar|
+    :Mostrar error de transición no permitida;
+    stop
+endif
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+title Actividad - UC8: Descargar constancia de estudios (PDF)
+|Alumno|
+start
+:Solicitar descarga de constancia de estudios;
+
+|Sistema|
+:Verificar que el estatus del alumno sea "Activo";
+:Verificar inscripción vigente en el periodo actual;
+if (¿Cumple ambos requisitos?) then (Sí)
+    :Generar folio único de validación;
+    :Construir documento oficial en formato PDF;
+    :Guardar registro de emisión;
+    |Alumno|
+    :Descargar archivo PDF;
+    stop
+else (No)
+    |Alumno|
+    :Mostrar mensaje "Trámite disponible solo para alumnos activos e inscritos";
+    stop
+endif
+@enduml

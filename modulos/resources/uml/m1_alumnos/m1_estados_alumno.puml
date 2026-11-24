@@ -1,0 +1,27 @@
+@startuml
+title Estados del Alumno (Estatus Académico)
+
+[*] --> Activo : Control Escolar registra alumno\ny genera matrícula (UC1)
+
+Activo --> BajaTemporal : Control Escolar registra\nbaja temporal (UC4)
+BajaTemporal --> Activo : Control Escolar autoriza\nreincorporación (UC4)
+
+Activo --> BajaDefinitiva : Control Escolar registra\nbaja definitiva (UC4)
+BajaTemporal --> BajaDefinitiva : Vence plazo sin\nreincorporación (UC4)
+
+Activo --> Egresado : Completa 100% de créditos\ndel plan de estudios (UC4)
+
+BajaDefinitiva --> [*]
+Egresado --> [*]
+
+note right of Activo
+  Puede inscribir materias,
+  consultar Kárdex y descargar
+  constancias oficiales.
+end note
+
+note right of BajaDefinitiva
+  No se elimina físicamente;
+  se conserva su historial.
+end note
+@enduml

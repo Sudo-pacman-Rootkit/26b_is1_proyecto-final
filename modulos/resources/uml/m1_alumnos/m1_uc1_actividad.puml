@@ -1,0 +1,21 @@
+@startuml
+title Actividad - UC1: Registrar alumno y generar matrícula
+|Control Escolar|
+start
+:Abrir formulario de alta de alumno;
+:Capturar datos personales, CURP y carrera;
+
+|Sistema|
+:Validar campos obligatorios y formato de CURP;
+if (¿Datos válidos y CURP no duplicada?) then (Sí)
+    :Generar matrícula institucional única;
+    :Guardar expediente con estatus "Activo";
+    |Control Escolar|
+    :Visualizar confirmación y matrícula asignada;
+    stop
+else (No)
+    |Control Escolar|
+    :Mostrar error de duplicidad o datos inválidos;
+    stop
+endif
+@enduml

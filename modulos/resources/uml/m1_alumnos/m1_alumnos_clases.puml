@@ -1,0 +1,80 @@
+@startuml
+title Diagrama de Clases - Módulo de Alumnos e Integración
+skinparam classAttributeIconSize 0
+
+class Usuario <<externo - Autenticación>> {
+  + idUsuario : int
+  + correoInstitucional : String
+  + activo : boolean
+}
+
+class Alumno {
+  + matricula : String
+  + nombre : String
+  + apellidos : String
+  + curp : String
+  + semestre : int
+  + estatus : EstatusAlumno
+  + telefono : String
+  + correoAlterno : String
+  + domicilio : String
+  + promedioGeneral : float
+  + creditosAcumulados : int
+  + generarMatricula() : String
+  + actualizarContacto() : boolean
+  + cambiarEstatus(nuevo : EstatusAlumno) : void
+}
+
+enum EstatusAlumno {
+  ACTIVO
+  BAJA_TEMPORAL
+  BAJA_DEFINITIVA
+  EGRESADO
+}
+
+class ConstanciaEstudios {
+  + idConstancia : int
+  + folio : String
+  + fechaEmision : DateTime
+  + cicloVigente : String
+  + generarPDF() : byte[]
+}
+
+class BitacoraEstatus {
+  + idMovimiento : int
+  + estatusAnterior : EstatusAlumno
+  + estatusNuevo : EstatusAlumno
+  + motivo : String
+  + fechaMovimiento : DateTime
+}
+
+class PlanEstudios <<externo - Asignaturas>> {
+  + clavePlan : String
+  + nombreCarrera : String
+  + creditosTotales : int
+}
+
+class PeriodoEscolar <<externo - Periodo>> {
+  + clavePeriodo : String
+  + activo : boolean
+}
+
+class Inscripcion <<externo - Inscripciones>> {
+  + folio : String
+  + estado : String
+}
+
+class Calificacion <<externo - Calificaciones>> {
+  + valor : float
+  + oficializada : boolean
+}
+
+Usuario <|-- Alumno
+Alumno --> EstatusAlumno
+Alumno "1" --> "0..*" ConstanciaEstudios : solicita
+Alumno "1" --> "0..*" BitacoraEstatus : registra
+Alumno "0..*" --> "1" PlanEstudios : cursa
+Alumno "1" --> "0..*" Inscripcion : realiza
+Alumno "1" --> "0..*" Calificacion : obtiene
+ConstanciaEstudios "0..*" --> "1" PeriodoEscolar : corresponde a
+@enduml

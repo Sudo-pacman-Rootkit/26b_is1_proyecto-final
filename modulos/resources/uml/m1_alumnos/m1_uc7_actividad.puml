@@ -1,0 +1,20 @@
+@startuml
+title Actividad - UC7: Consultar historial académico (Kárdex)
+|Alumno|
+start
+:Seleccionar opción "Historial Académico";
+
+|Sistema|
+:Consultar calificaciones oficializadas en Módulo Calificaciones;
+if (¿Tiene calificaciones oficializadas?) then (Sí)
+    :Calcular promedio general y créditos aprobados;
+    :Ordenar materias por periodo escolar;
+    |Alumno|
+    :Visualizar Kárdex completo y porcentaje de avance;
+    stop
+else (No)
+    |Alumno|
+    :Mostrar aviso "Sin calificaciones oficializadas registradas";
+    stop
+endif
+@enduml

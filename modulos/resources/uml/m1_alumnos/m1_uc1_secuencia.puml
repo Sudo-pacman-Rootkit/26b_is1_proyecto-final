@@ -1,0 +1,26 @@
+@startuml
+title UC1 - Registrar alumno y generar matrícula - Secuencia
+autonumber
+actor "Control Escolar" as Admin
+boundary "Interfaz Web" as UI
+control "Controlador de Alumnos" as Ctrl
+database "Base de Datos" as BD
+
+Admin -> UI : Abrir formulario de registro de alumno
+UI --> Admin : Mostrar campos (nombre, CURP, carrera, contacto)
+Admin -> UI : Enviar datos del nuevo alumno
+UI -> Ctrl : registrarAlumno(datosAlumno)
+Ctrl -> BD : Verificar si existe alumno con la misma CURP
+BD --> Ctrl : Resultado de búsqueda
+
+alt Alumno no registrado previamente
+    Ctrl -> Ctrl : Generar matrícula institucional única
+    Ctrl -> BD : Guardar alumno con estatus "Activo"
+    BD --> Ctrl : Confirmación y matrícula asignada
+    Ctrl --> UI : Registro exitoso (matrícula)
+    UI --> Admin : Mostrar confirmación y matrícula generada
+else CURP duplicada o datos incompletos
+    Ctrl --> UI : Error "El alumno ya se encuentra registrado"
+    UI --> Admin : Mostrar mensaje de error
+end
+@enduml

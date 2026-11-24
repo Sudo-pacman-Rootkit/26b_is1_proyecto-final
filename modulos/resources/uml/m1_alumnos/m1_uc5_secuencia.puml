@@ -1,0 +1,15 @@
+@startuml
+title UC5 - Consultar datos personales y académicos - Secuencia
+autonumber
+actor "Alumno" as A
+boundary "Interfaz Web" as UI
+control "Controlador de Alumnos" as Ctrl
+database "Base de Datos" as BD
+
+A -> UI : Abrir sección "Mi Perfil"
+UI -> Ctrl : obtenerPerfil(matricula)
+Ctrl -> BD : Consultar datos personales y académicos del alumno
+BD --> Ctrl : Registro del alumno
+Ctrl --> UI : Enviar información del perfil
+UI --> A : Mostrar datos institucionales y de contacto
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+title Actividad - UC3: Modificar datos académicos del alumno
+|Control Escolar|
+start
+:Buscar y seleccionar expediente del alumno;
+:Modificar carrera, plan de estudios o semestre;
+
+|Sistema|
+:Validar consistencia de los datos académicos;
+if (¿Datos válidos?) then (Sí)
+    :Actualizar expediente en la base de datos;
+    |Control Escolar|
+    :Mostrar confirmación de actualización;
+    stop
+else (No)
+    |Control Escolar|
+    :Mostrar error y solicitar corrección;
+    stop
+endif
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+title Actividad - UC5: Consultar datos personales y académicos
+|Alumno|
+start
+:Acceder a la sección "Mi Perfil";
+
+|Sistema|
+:Obtener expediente del alumno autenticado;
+:Separar datos institucionales (solo lectura) y datos de contacto;
+
+|Alumno|
+:Visualizar matrícula, carrera, semestre, estatus y contacto;
+stop
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+title UC6 - Editar datos de contacto y domicilio - Secuencia
+autonumber
+actor "Alumno" as A
+boundary "Interfaz Web" as UI
+control "Controlador de Alumnos" as Ctrl
+database "Base de Datos" as BD
+
+A -> UI : Modificar teléfono, correo alterno o domicilio
+UI -> Ctrl : actualizarContacto(matricula, datosContacto)
+Ctrl -> Ctrl : Validar formato de teléfono y correo
+
+alt Formato válido
+    Ctrl -> BD : Actualizar datos de contacto del alumno
+    BD --> Ctrl : Registro actualizado
+    Ctrl --> UI : Confirmación
+    UI --> A : Mostrar mensaje "Datos actualizados correctamente"
+else Formato inválido
+    Ctrl --> UI : Error en formato de datos
+    UI --> A : Indicar campos a corregir
+end
+@enduml
