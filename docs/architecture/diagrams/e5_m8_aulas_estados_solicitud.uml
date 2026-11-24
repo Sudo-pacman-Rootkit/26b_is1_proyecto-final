@@ -1,0 +1,35 @@
+@startuml e5_m8_aulas_estados_solicitud
+title Módulo 8 — Estados de una solicitud de espacio
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam roundCorner 12
+skinparam ArrowColor #40556B
+skinparam stateBackgroundColor #EAF2FB
+skinparam stateBorderColor #2F5D8A
+skinparam noteBackgroundColor #FFF7E6
+skinparam noteBorderColor #B7791F
+hide empty description
+
+state "Registrada" as Registrada
+state "En revisión" as EnRevision
+state "Aprobada" as Aprobada
+state "Rechazada" as Rechazada
+state "Cancelada" as Cancelada
+
+[*] --> Registrada : Profesor o Administrador / Coordinador registra la solicitud
+Registrada --> EnRevision : Administrador / Coordinador revisa
+EnRevision --> Aprobada : [Sin traslapes y aforo suficiente]
+EnRevision --> Rechazada : [Traslape de horario o aforo insuficiente]
+Registrada --> Cancelada : Administrador / Coordinador cancela
+EnRevision --> Cancelada : Administrador / Coordinador cancela
+Aprobada --> [*] : Generar asignación de aula
+Rechazada --> [*] : Notificar motivo del rechazo
+Cancelada --> [*] : Cerrar solicitud
+
+note bottom of EnRevision
+  Se valida la disponibilidad del aula
+  y la capacidad para la actividad.
+end note
+@enduml

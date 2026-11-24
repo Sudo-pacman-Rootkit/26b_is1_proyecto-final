@@ -1,0 +1,36 @@
+@startuml e5_m8_aulas_estados_asignacion
+title Módulo 8 — Estados de una asignación de aula
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam roundCorner 12
+skinparam ArrowColor #40556B
+skinparam stateBackgroundColor #EAF2FB
+skinparam stateBorderColor #2F5D8A
+skinparam noteBackgroundColor #FFF7E6
+skinparam noteBorderColor #B7791F
+hide empty description
+
+state "Programada" as Programada
+state "En modificación" as EnModificacion
+state "En uso" as EnUso
+state "Finalizada" as Finalizada
+state "Cancelada" as Cancelada
+
+[*] --> Programada : Solicitud aprobada y espacio reservado
+Programada --> EnModificacion : Administrador / Coordinador solicita cambios
+EnModificacion --> Programada : [Sin traslapes y aforo suficiente]\nGuardar nueva asignación
+EnModificacion --> Programada : [Conflicto o aforo insuficiente]\nConservar asignación anterior
+Programada --> EnUso : Inicia actividad en el horario reservado
+EnUso --> Finalizada : Termina la actividad
+Programada --> Cancelada : Administrador / Coordinador cancela
+Cancelada --> [*] : Liberar aula y horario
+Finalizada --> [*] : Conservar historial
+
+note right of EnModificacion
+  Cualquier cambio de horario o espacio
+  requiere validar nuevamente la
+  disponibilidad y la capacidad.
+end note
+@enduml
