@@ -1,0 +1,31 @@
+@startuml e6_m8_calificaciones_contexto_nivel2
+title Nivel 2 - Procesos del Módulo Registro de Calificaciones
+top to bottom direction
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam roundcorner 15
+skinparam defaultTextAlignment center
+skinparam ArrowColor #444444
+actor "Profesor" as Profesor
+actor "Personal de\nControl Escolar" as CE
+actor "Alumno" as Alumno
+rectangle "1. Captura\n(calificaciones y asistencia)" as P1 #EBF5FB
+rectangle "2. Actas\n(cerrar y oficializar)" as P2 #EBF5FB
+rectangle "3. Consultas y revisiones" as P3 #EBF5FB
+database "D1 Calificaciones" as D1 #F9E79F
+database "D2 Asistencias" as D2 #F9E79F
+database "D3 Actas" as D3 #F9E79F
+database "D4 Solicitudes" as D4 #F9E79F
+Profesor --> P1 : calificaciones y lista
+Profesor --> P2 : cierre del acta
+CE --> P2 : oficialización
+Alumno --> P3 : consulta o revisión
+P1 --> D1
+P1 --> D2
+D1 --> P2
+P2 --> D3
+D1 --> P3
+P3 --> D4
+P3 --> Alumno : calificaciones
+@enduml

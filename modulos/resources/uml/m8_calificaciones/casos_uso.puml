@@ -1,0 +1,28 @@
+@startuml m8_calificaciones_casos_uso
+!pragma layout smetana
+left to right direction
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam defaultFontSize 13
+actor "Profesor" as PR
+actor "Personal de\nControl Escolar" as CE
+actor "Alumno" as AL
+rectangle "Módulo de Registro de Calificaciones" {
+  usecase "Capturar\ncalificaciones" as UC01
+  usecase "Registrar\nasistencia" as UC02
+  usecase "Cerrar acta" as UC03
+  usecase "Oficializar acta" as UC04
+  usecase "Consultar\ncalificaciones" as UC05
+  usecase "Solicitar revisión" as UC06
+  usecase "Validar fechas\nde captura" as UC07
+  usecase "Generar acta" as UC08
+}
+PR -- UC01
+PR -- UC02
+PR -- UC03
+CE -- UC04
+AL -- UC05
+AL -- UC06
+UC01 ..> UC07 : <<include>>
+UC03 ..> UC08 : <<include>>
+@enduml

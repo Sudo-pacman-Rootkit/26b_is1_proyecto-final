@@ -1,0 +1,27 @@
+@startuml e6_m8_calificaciones_contexto_nivel1
+title Nivel 1 - Módulo Registro de Calificaciones
+left to right direction
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam roundcorner 15
+skinparam defaultTextAlignment center
+skinparam ArrowColor #444444
+actor "Profesor" as Profesor
+actor "Personal de\nControl Escolar" as CE
+actor "Alumno" as Alumno
+rectangle "Módulo Registro\nde Calificaciones" as M #D6EAF8
+rectangle "Módulo Periodos\nescolares" as Per #F2F4F4
+rectangle "Módulo\nInscripciones" as Ins #F2F4F4
+rectangle "Módulo Catálogo\nde exámenes" as Cat #F2F4F4
+rectangle "Módulo\nAsignaturas" as Asg #F2F4F4
+rectangle "Módulo\nAlumnos" as Alu #F2F4F4
+Profesor --> M : calificaciones, asistencia\ny cierre de acta
+CE --> M : oficialización del acta
+Alumno --> M : consulta y solicitud de revisión
+Per --> M : fechas de captura
+Ins --> M : alumnos del grupo
+Cat --> M : requisitos del examen
+M --> Asg : materias acreditadas
+M --> Alu : calificaciones del alumno
+@enduml
