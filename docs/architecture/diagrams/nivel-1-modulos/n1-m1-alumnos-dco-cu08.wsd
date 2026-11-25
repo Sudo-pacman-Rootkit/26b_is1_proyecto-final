@@ -1,0 +1,87 @@
+﻿@startuml
+' === ESTILO HOMOLOGADO EQUIPO 1 (ACTIVIDAD 3) ===
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam ArrowColor #1B365D
+skinparam ArrowFontColor #1B365D
+skinparam actor {
+    BackgroundColor #E3F2FD
+    BorderColor #1565C0
+    FontColor #0D47A1
+}
+skinparam package {
+    BackgroundColor #F8FAFC
+    BorderColor #1E3A8A
+    FontColor #1E3A8A
+}
+skinparam rectangle {
+    BackgroundColor #FFFFFF
+    BorderColor #1E3A8A
+    FontColor #0F172A
+}
+skinparam usecase {
+    BackgroundColor #E0F2FE
+    BorderColor #0284C7
+    FontColor #0C4A6E
+}
+skinparam component {
+    BackgroundColor #DBEAFE
+    BorderColor #1D4ED8
+    FontColor #1E3A8A
+}
+skinparam database {
+    BackgroundColor #FEF3C7
+    BorderColor #D97706
+    FontColor #78350F
+}
+skinparam sequence {
+    ParticipantBackgroundColor #DBEAFE
+    ParticipantBorderColor #1D4ED8
+    ParticipantFontColor #1E3A8A
+    BoundaryBackgroundColor #E0F2FE
+    BoundaryBorderColor #0284C7
+    ControlBackgroundColor #DCFCE7
+    ControlBorderColor #15803D
+    LifeLineBorderColor #64748B
+}
+skinparam activity {
+    BackgroundColor #DBEAFE
+    BorderColor #1D4ED8
+    FontColor #1E3A8A
+    DiamondBackgroundColor #FEF3C7
+    DiamondBorderColor #D97706
+}
+skinparam state {
+    BackgroundColor #E0F2FE
+    BorderColor #0369A1
+    FontColor #0C4A6E
+}
+skinparam class {
+    BackgroundColor #F0F9FF
+    BorderColor #0284C7
+    HeaderBackgroundColor #0284C7
+    FontColor #0F172A
+}
+title UC8 - Descargar constancia de estudios (PDF) - Componentes
+left to right direction
+skinparam componentStyle rectangle
+
+actor "Alumno" as A
+package "Módulo de Alumnos" {
+    component "Interfaz Web" as UI
+    component "Controlador de Documentos" as Ctrl
+    component "Generador de PDF" as PDF
+    database "Base de Datos" as BD
+}
+component "Módulo Periodo" as Per
+component "Módulo Inscripciones" as Insc
+
+A --> UI : Solicita constancia PDF
+UI --> Ctrl : Genera constancia
+Ctrl --> BD : Verifica estatus "Activo" y guarda folio
+Ctrl --> Per : Consulta periodo activo
+Ctrl --> Insc : Verifica inscripción vigente
+Ctrl --> PDF : Construye archivo PDF
+@enduml

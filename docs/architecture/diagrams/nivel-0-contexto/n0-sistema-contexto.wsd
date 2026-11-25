@@ -1,0 +1,39 @@
+﻿@startuml
+title Diagrama de Contexto (Nivel 0) - Sistema Integral de Control Escolar
+left to right direction
+
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #1B365D
+
+skinparam actor {
+    BackgroundColor #E3F2FD
+    BorderColor #1565C0
+    FontColor #0D47A1
+}
+skinparam storage {
+    BackgroundColor #1E3A8A
+    BorderColor #0F172A
+    FontColor #FFFFFF
+}
+
+actor "Alumno" as AL
+actor "Profesor" as PR
+actor "Coordinador\nAcadémico" as CO
+actor "Control Escolar /\nAdministrador" as CE
+
+storage "0. Sistema Integral de\nControl Escolar" as SYS
+
+AL --> SYS : Credenciales, contacto, inscripción,\nrevisión de notas y constancias
+SYS --> AL : Horario, calificaciones, Kárdex,\nexámenes y constancias PDF
+
+PR --> SYS : Asistencia, captura y cierre de actas,\nsolicitud de aulas y perfil
+SYS --> PR : Listas de grupos, horarios,\naplicación de exámenes y reglas
+
+CO --> SYS : Plan de estudios, asignaturas,\nseriación, temarios y aulas
+SYS --> CO : Reportes académicos, ocupación\nde aulas y avance curricular
+
+CE --> SYS : Alta/baja de alumnos y profesores,\nperiodos, ventanas y oficialización de actas
+SYS --> CE : Padrón institucional, actas\noficializadas y reportes globales
+@enduml

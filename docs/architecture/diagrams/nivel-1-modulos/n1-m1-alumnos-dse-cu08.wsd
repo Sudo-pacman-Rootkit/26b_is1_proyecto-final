@@ -1,0 +1,95 @@
+﻿@startuml
+' === ESTILO HOMOLOGADO EQUIPO 1 (ACTIVIDAD 3) ===
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam ArrowColor #1B365D
+skinparam ArrowFontColor #1B365D
+skinparam actor {
+    BackgroundColor #E3F2FD
+    BorderColor #1565C0
+    FontColor #0D47A1
+}
+skinparam package {
+    BackgroundColor #F8FAFC
+    BorderColor #1E3A8A
+    FontColor #1E3A8A
+}
+skinparam rectangle {
+    BackgroundColor #FFFFFF
+    BorderColor #1E3A8A
+    FontColor #0F172A
+}
+skinparam usecase {
+    BackgroundColor #E0F2FE
+    BorderColor #0284C7
+    FontColor #0C4A6E
+}
+skinparam component {
+    BackgroundColor #DBEAFE
+    BorderColor #1D4ED8
+    FontColor #1E3A8A
+}
+skinparam database {
+    BackgroundColor #FEF3C7
+    BorderColor #D97706
+    FontColor #78350F
+}
+skinparam sequence {
+    ParticipantBackgroundColor #DBEAFE
+    ParticipantBorderColor #1D4ED8
+    ParticipantFontColor #1E3A8A
+    BoundaryBackgroundColor #E0F2FE
+    BoundaryBorderColor #0284C7
+    ControlBackgroundColor #DCFCE7
+    ControlBorderColor #15803D
+    LifeLineBorderColor #64748B
+}
+skinparam activity {
+    BackgroundColor #DBEAFE
+    BorderColor #1D4ED8
+    FontColor #1E3A8A
+    DiamondBackgroundColor #FEF3C7
+    DiamondBorderColor #D97706
+}
+skinparam state {
+    BackgroundColor #E0F2FE
+    BorderColor #0369A1
+    FontColor #0C4A6E
+}
+skinparam class {
+    BackgroundColor #F0F9FF
+    BorderColor #0284C7
+    HeaderBackgroundColor #0284C7
+    FontColor #0F172A
+}
+title UC8 - Descargar constancia de estudios (PDF) - Secuencia
+autonumber
+actor "Alumno" as A
+boundary "Interfaz Web" as UI
+control "Controlador de Documentos" as Ctrl
+participant "Módulo Periodo" as Per
+participant "Módulo Inscripciones" as Insc
+database "Base de Datos" as BD
+
+A -> UI : Presionar "Descargar constancia de estudios"
+UI -> Ctrl : generarConstancia(matricula)
+Ctrl -> BD : Verificar estatus académico del alumno
+BD --> Ctrl : Estatus del alumno
+Ctrl -> Per : Obtener periodo escolar activo
+Per --> Ctrl : Periodo vigente
+Ctrl -> Insc : Verificar inscripción vigente del alumno
+Insc --> Ctrl : Confirmación de inscripción
+
+alt Alumno "Activo" e inscrito en periodo vigente
+    Ctrl -> Ctrl : Generar folio único y documento PDF (< 3 seg)
+    Ctrl -> BD : Registrar folio de constancia emitida
+    BD --> Ctrl : Folio guardado
+    Ctrl --> UI : Enviar archivo PDF
+    UI --> A : Descargar constancia de estudios
+else Alumno inactivo o sin inscripción vigente
+    Ctrl --> UI : Error "No cumple requisitos para emitir constancia"
+    UI --> A : Mostrar motivo de restricción
+end
+@enduml

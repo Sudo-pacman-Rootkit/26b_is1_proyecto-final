@@ -1,0 +1,90 @@
+﻿@startuml
+' === ESTILO HOMOLOGADO EQUIPO 1 (ACTIVIDAD 3) ===
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam ArrowColor #1B365D
+skinparam ArrowFontColor #1B365D
+skinparam actor {
+    BackgroundColor #E3F2FD
+    BorderColor #1565C0
+    FontColor #0D47A1
+}
+skinparam package {
+    BackgroundColor #F8FAFC
+    BorderColor #1E3A8A
+    FontColor #1E3A8A
+}
+skinparam rectangle {
+    BackgroundColor #FFFFFF
+    BorderColor #1E3A8A
+    FontColor #0F172A
+}
+skinparam usecase {
+    BackgroundColor #E0F2FE
+    BorderColor #0284C7
+    FontColor #0C4A6E
+}
+skinparam component {
+    BackgroundColor #DBEAFE
+    BorderColor #1D4ED8
+    FontColor #1E3A8A
+}
+skinparam database {
+    BackgroundColor #FEF3C7
+    BorderColor #D97706
+    FontColor #78350F
+}
+skinparam sequence {
+    ParticipantBackgroundColor #DBEAFE
+    ParticipantBorderColor #1D4ED8
+    ParticipantFontColor #1E3A8A
+    BoundaryBackgroundColor #E0F2FE
+    BoundaryBorderColor #0284C7
+    ControlBackgroundColor #DCFCE7
+    ControlBorderColor #15803D
+    LifeLineBorderColor #64748B
+}
+skinparam activity {
+    BackgroundColor #DBEAFE
+    BorderColor #1D4ED8
+    FontColor #1E3A8A
+    DiamondBackgroundColor #FEF3C7
+    DiamondBorderColor #D97706
+}
+skinparam state {
+    BackgroundColor #E0F2FE
+    BorderColor #0369A1
+    FontColor #0C4A6E
+}
+skinparam class {
+    BackgroundColor #F0F9FF
+    BorderColor #0284C7
+    HeaderBackgroundColor #0284C7
+    FontColor #0F172A
+}
+title UC7 - Consultar historial académico (Kárdex) - Secuencia
+autonumber
+actor "Alumno" as A
+boundary "Interfaz Web" as UI
+control "Controlador de Alumnos" as Ctrl
+participant "Módulo Calificaciones" as Cal
+participant "Módulo Asignaturas" as Asig
+
+A -> UI : Seleccionar "Historial Académico (Kárdex)"
+UI -> Ctrl : obtenerKardex(matricula)
+Ctrl -> Cal : Consultar calificaciones oficializadas del alumno
+Cal --> Ctrl : Lista de calificaciones por periodo
+Ctrl -> Asig : Consultar créditos totales del plan de estudios
+Asig --> Ctrl : Créditos requeridos del plan
+
+alt Existen registros académicos
+    Ctrl -> Ctrl : Calcular promedio general y porcentaje de avance
+    Ctrl --> UI : Enviar Kárdex consolidado
+    UI --> A : Mostrar historial por periodo, promedio y créditos
+else Sin historial registrado
+    Ctrl --> UI : Kárdex sin materias cursadas
+    UI --> A : Mostrar mensaje "Aún no cuentas con historial oficial"
+end
+@enduml
